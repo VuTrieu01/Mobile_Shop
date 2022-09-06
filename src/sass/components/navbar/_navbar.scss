@@ -1,23 +1,52 @@
 .menu {
-  margin-inline: 40px;
+  background-color: $main-menu;
   &__header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin-inline: 24px;
-    &--banner img {
+    margin-right: 150px;
+    &--logo img {
       display: block;
-      width: 104px;
-      height: 16px;
-      margin: 8px 60px 8px 8px;
+      width: 160px;
+      margin: 0px 60px 0px 150px;
     }
-    &--item {
+    &--search {
       display: flex;
-      margin-block: 24px;
-      padding: 8px;
-      text-decoration: none;
-      color: $main-text;
-      font-size: 17px;
-      cursor: pointer;
+      input {
+        background-color: $main-background;
+        border: 0;
+        border-radius: 2px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        font-size: 16px;
+        padding: 12px;
+        width: 500px;
+        height: 20px;
+      }
+      &--icon {
+        height: 44px;
+        width: 50px;
+        background-color: $main-text;
+        display: grid;
+        place-items: center;
+        border-radius: 0px 2px 2px 0px;
+        cursor: pointer;
+      }
+    }
+    &--link {
+      display: flex;
+      &--item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        margin-left: 24px;
+        padding-right: 8px;
+        color: $main-background;
+        font-size: 16px;
+        font-weight: 540;
+        cursor: pointer;
+      }
     }
   }
 }
