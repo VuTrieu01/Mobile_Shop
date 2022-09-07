@@ -18,6 +18,9 @@ export default function ClientRoutes() {
       <Route path="/user" element={<User />} />
       <Route path="/phone" element={<Phone />} />
       <Route path="/laptop" element={<Laptop />} />
+      <Route path="/apple" element={<Apple />} />
+      <Route path="/oldMachine" element={<OldMachine />} />
+      <Route path="/pc" element={<Pc />} />
       <Route path="*" element={<NoMatch />} />
     </Routes>
   );
