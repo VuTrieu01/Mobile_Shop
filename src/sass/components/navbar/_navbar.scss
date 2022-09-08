@@ -48,6 +48,9 @@
         font-weight: 540;
         cursor: pointer;
       }
+      &--item:hover {
+        color: $main-text2;
+      }
     }
   }
 
@@ -64,6 +67,9 @@
       span {
         margin-right: 10px;
       }
+    }
+    &--link:hover {
+      color: $main-text2;
     }
   }
 }
