@@ -19,7 +19,7 @@ export default function Navbar() {
       icon: <CgShoppingCart size={25} />,
     },
     {
-      path: "user",
+      path: "signIn",
       name: "Tài khoản của tôi",
       icon: <FaUserCircle size={25} />,
     },

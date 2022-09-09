@@ -1,0 +1,11 @@
+.login {
+  display: flex;
+  position: relative;
+  &__fields {
+    display: flex;
+    position: absolute;
+    background-color: black;
+    width: 500px;
+    height: 500px;
+  }
+}

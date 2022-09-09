@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "../features/home/Home";
 import ShoppingCart from "../features/shoppingCart/ShoppingCart";
-import User from "../features/user/User";
+import SignIn from "../features/user/SignIn";
 import Apple from "../features/apple/Apple";
 import Laptop from "../features/laptop/Laptop";
 import OldMachine from "../features/oldMachine/OldMachine";
@@ -15,7 +15,7 @@ export default function ClientRoutes() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/shoppingCart" element={<ShoppingCart />} />
-      <Route path="/user" element={<User />} />
+      <Route path="/signIn" element={<SignIn />} />
       <Route path="/phone" element={<Phone />} />
       <Route path="/laptop" element={<Laptop />} />
       <Route path="/apple" element={<Apple />} />
