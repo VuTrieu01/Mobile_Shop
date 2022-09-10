@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   CgSearch,
@@ -10,21 +10,10 @@ import { FaUserCircle, FaApple } from "react-icons/fa";
 import { RiComputerFill } from "react-icons/ri";
 import { AiOutlineReload } from "react-icons/ai";
 import logo from "../assets/images/logo-fpt-shop.png";
+import SignIn from "../features/user/SignIn";
 
 export default function Navbar() {
-  const menu1 = [
-    {
-      path: "shoppingCart",
-      name: "Giỏ hàng",
-      icon: <CgShoppingCart size={25} />,
-    },
-    {
-      path: "signIn",
-      name: "Tài khoản của tôi",
-      icon: <FaUserCircle size={25} />,
-    },
-  ];
-  const menu2 = [
+  const menu = [
     {
       path: "phone",
       name: "ĐIỆN THOẠI",
@@ -51,9 +40,12 @@ export default function Navbar() {
       icon: <AiOutlineReload size={25} />,
     },
   ];
+  const [login, setLogin] = useState(false);
+  const showLogin = () => setLogin(!login);
 
   return (
     <div className="menu">
+      <SignIn login={login} showLogin={showLogin} />
       <div className="menu__header">
         <div className="menu__header--logo">
           <Link to="/">
@@ -70,20 +62,22 @@ export default function Navbar() {
           </div>
         </div>
         <div className="menu__header--link">
-          {menu1.map((item, index) => (
-            <Link
-              to={item.path}
-              key={index}
-              className="menu__header--link--item"
-            >
-              <span>{item.icon}</span>
-              <span>{item.name}</span>
-            </Link>
-          ))}
+          <div className="menu__header--link--item">
+            <span>
+              <CgShoppingCart size={25} />
+            </span>
+            <span>Giỏ hàng</span>
+          </div>
+          <div className="menu__header--link--item" onClick={showLogin}>
+            <span>
+              <FaUserCircle size={25} />
+            </span>
+            <span>Tài khoản của tôi</span>
+          </div>
         </div>
       </div>
       <div className="menu__header2">
-        {menu2.map((item, index) => (
+        {menu.map((item, index) => (
           <Link to={item.path} key={index} className="menu__header2--link">
             <span>{item.icon}</span>
             <span>{item.name}</span>
