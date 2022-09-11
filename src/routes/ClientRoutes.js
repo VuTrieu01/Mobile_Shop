@@ -9,11 +9,13 @@ import OldMachine from "../features/oldMachine/OldMachine";
 import Pc from "../features/pc/Pc";
 import Phone from "../features/phone/CellPhone";
 import NoMatch from "../components/NoMatch";
+import Signup from "../features/user/SignUp";
 
 export default function ClientRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/signUp" element={<Signup />} />
       <Route path="/shoppingCart" element={<ShoppingCart />} />
       <Route path="/signIn" element={<SignIn />} />
       <Route path="/phone" element={<Phone />} />

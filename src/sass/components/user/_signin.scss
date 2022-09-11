@@ -3,17 +3,18 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: $main-text2;
-  opacity: 0.9;
+  background-color: rgba($main-text2, 0.9);
   justify-content: center;
   align-items: center;
   &__fields {
     background-color: $main-background;
     width: 500px;
     height: 500px;
+    padding: 5px;
+    border-radius: 5px;
     &--icon {
       display: flex;
-      justify-content: flex-end;
+      margin-left: 95%;
       cursor: pointer;
     }
     &--icon:hover {
@@ -23,13 +24,57 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding-right: 30px;
       h1 {
-        margin-top: 0;
+        margin-block: 0;
+        margin-left: 30px;
         color: $text;
       }
-      input {
-        width: 100px;
-        height: 20px;
+      h4 {
+        margin: 0;
+        margin-block: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $error-bg;
+        color: $error-text;
+        margin-left: 32px;
+        width: 95%;
+        height: 40px;
+        border-radius: 4px;
+      }
+      p {
+        margin: 0;
+        width: 90%;
+        input {
+          width: 100%;
+          height: 30px;
+          border-radius: 4px;
+          border: 1px solid $main-text2;
+          margin-block: 15px;
+          padding-block: 5px;
+          padding-inline: 15px;
+        }
+      }
+      button {
+        margin-left: 32px;
+        width: 95%;
+        height: 40px;
+        background-color: $main-menu;
+        color: $btn-text;
+        border-radius: 4px;
+        border: 0;
+        cursor: pointer;
+        margin-block: 15px;
+        font-weight: bold;
+      }
+      button:hover {
+        background-color: $btn-text;
+        color: $main-menu;
+        border: 1px solid $main-menu;
+      }
+      span {
+        cursor: pointer;
       }
     }
   }

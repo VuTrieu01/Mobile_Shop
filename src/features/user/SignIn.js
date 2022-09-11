@@ -1,26 +1,68 @@
-import React from "react";
-// import * as AiIcons from "react-icons/ai";
+import React, { useRef, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import { useAuth } from "./AuthContext";
+import Signup from "./SignUp";
 
 export default function SignIn({ login, showLogin }) {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { signup } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const [register, setRegister] = useState(false);
+  const showRegister = () => setRegister(!register);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      setError("");
+      setLoading(true);
+      await signup(emailRef.current.value, passwordRef.current.value);
+    } catch (e) {
+      setError("Tạo tài khoản thất bại");
+      console.log(e);
+    }
+    setLoading(false);
+  }
+
   return (
     <>
       {login ? (
         <div className="login">
           <div className="login__fields">
-            <div className="login__fields--icon">
-              <AiFillCloseCircle size={25} onClick={showLogin} />
-            </div>
-            <div className="login__fields--item">
+            <AiFillCloseCircle
+              size={25}
+              className="login__fields--icon"
+              onClick={showLogin}
+            />
+            <form className="login__fields--item" onSubmit={handleSubmit}>
               <h1>Đăng nhập</h1>
-              <div>Email</div>
-              <input placeholder="Email" />
-              <div>Mật khẩu</div>
-              <input type="password" placeholder="Mật khẩu" />
-              <button type="submit">Đăng nhập</button>
-              <div>Chưa có tài khoản? Đăng ký</div>
-            </div>
+              {error === "" ? null : <h4>{error}</h4>}
+              <p>
+                <label>Email</label>
+                <input placeholder="Email" ref={emailRef} name="email" />
+              </p>
+              <p>
+                <label>Mật khẩu</label>
+                <input
+                  type="password"
+                  placeholder="Mật khẩu"
+                  ref={passwordRef}
+                />
+              </p>
+              <button type="submit" disabled={loading}>
+                Đăng nhập
+              </button>
+              <span onClick={showRegister}>Chưa có tài khoản? Đăng ký</span>
+            </form>
           </div>
+          <Signup
+            register={register}
+            showRegister={showRegister}
+            showLogin={showLogin}
+          />
         </div>
       ) : null}
     </>
