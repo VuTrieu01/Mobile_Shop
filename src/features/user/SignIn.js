@@ -12,7 +12,10 @@ export default function SignIn({ login, showLogin }) {
   const [loading, setLoading] = useState(false);
 
   const [register, setRegister] = useState(false);
-  const showRegister = () => setRegister(!register);
+  const showRegister = () => {
+    setRegister(!register);
+    showLogin();
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -58,13 +61,13 @@ export default function SignIn({ login, showLogin }) {
               <span onClick={showRegister}>Chưa có tài khoản? Đăng ký</span>
             </form>
           </div>
-          <Signup
-            register={register}
-            showRegister={showRegister}
-            showLogin={showLogin}
-          />
         </div>
       ) : null}
+      <Signup
+        register={register}
+        showRegister={showRegister}
+        showLogin={showLogin}
+      />
     </>
   );
 }
