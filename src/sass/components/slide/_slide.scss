@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  z-index: 1004;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+  width: 90%;
+  margin-top: 5px;
+  &__slide > div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    height: 300px;
+  }
+  &__slide span {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: white;
+    background: rgba(141, 174, 224, 0.5);
+    align-items: center;
+  }
+}
