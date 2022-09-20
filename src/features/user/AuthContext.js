@@ -15,6 +15,14 @@ export function AuthProvider({ children }) {
     return firebase.createUserWithEmailAndPassword(auth, email, password);
   }
 
+  function signIn(email, password) {
+    return firebase.signInWithEmailAndPassword(auth, email, password);
+  }
+
+  function logOut() {
+    return firebase.signOut(auth);
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setLoading(false);
@@ -27,6 +35,8 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser,
     signup,
+    signIn,
+    logOut,
   };
   return (
     <AuthContext.Provider value={value}>

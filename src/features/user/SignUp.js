@@ -1,14 +1,16 @@
 import React, { useRef, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
-export default function Signup({ register, showRegister, showLogin }) {
+export default function Signup({ register, showRegister, setRegister }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const history = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -19,12 +21,16 @@ export default function Signup({ register, showRegister, showLogin }) {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
+      history("/");
+      exitRegister();
     } catch (e) {
       setError("Tạo tài khoản thất bại");
       console.log(e);
     }
     setLoading(false);
   }
+
+  const exitRegister = () => setRegister(!register);
 
   return (
     <>
@@ -34,7 +40,7 @@ export default function Signup({ register, showRegister, showLogin }) {
             <AiFillCloseCircle
               size={25}
               className="login__fields--icon"
-              onClick={showRegister}
+              onClick={exitRegister}
             />
             <form className="login__fields--item" onSubmit={handleSubmit}>
               <h1>Đăng ký</h1>

@@ -10,11 +10,14 @@ import Pc from "../features/pc/Pc";
 import Phone from "../features/phone/CellPhone";
 import NoMatch from "../components/NoMatch";
 import Signup from "../features/user/SignUp";
+import PrivateRoute from "../routes/PrivateRoute";
 
 export default function ClientRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<PrivateRoute />}>
+        <Route path="/" element={<Home />} />
+      </Route>
       <Route path="/signUp" element={<Signup />} />
       <Route path="/shoppingCart" element={<ShoppingCart />} />
       <Route path="/signIn" element={<SignIn />} />

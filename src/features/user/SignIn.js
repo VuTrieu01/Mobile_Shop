@@ -1,15 +1,16 @@
 import React, { useRef, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import Signup from "./SignUp";
 
 export default function SignIn({ login, showLogin }) {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { signup } = useAuth();
+  const { signIn } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const history = useNavigate();
 
   const [register, setRegister] = useState(false);
   const showRegister = () => {
@@ -22,9 +23,11 @@ export default function SignIn({ login, showLogin }) {
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await signIn(emailRef.current.value, passwordRef.current.value);
+      history("/");
+      showLogin();
     } catch (e) {
-      setError("Tạo tài khoản thất bại");
+      setError("Đăng nhập không thành công");
       console.log(e);
     }
     setLoading(false);
@@ -66,7 +69,7 @@ export default function SignIn({ login, showLogin }) {
       <Signup
         register={register}
         showRegister={showRegister}
-        showLogin={showLogin}
+        setRegister={setRegister}
       />
     </>
   );

@@ -11,6 +11,8 @@ import { RiComputerFill } from "react-icons/ri";
 import { AiOutlineReload } from "react-icons/ai";
 import logo from "../assets/images/logo-fpt-shop.png";
 import SignIn from "../features/user/SignIn";
+import Dropdown from "./Dropdown";
+import { useAuth } from "../features/user/AuthContext";
 
 export default function Navbar() {
   const menu = [
@@ -42,6 +44,10 @@ export default function Navbar() {
   ];
   const [login, setLogin] = useState(false);
   const showLogin = () => setLogin(!login);
+  const [dropdown, setDropdown] = useState(false);
+  const showDropdown = () => setDropdown(!dropdown);
+
+  const { currentUser } = useAuth();
 
   return (
     <div className="menu">
@@ -68,12 +74,26 @@ export default function Navbar() {
             </span>
             <span>Giỏ hàng</span>
           </div>
-          <div className="menu__header--link--item" onClick={showLogin}>
-            <span>
-              <FaUserCircle size={25} />
-            </span>
-            <span>Tài khoản của tôi</span>
-          </div>
+          {currentUser ? (
+            <div
+              className="menu__header--link--item"
+              onMouseEnter={showDropdown}
+              onMouseLeave={showDropdown}
+            >
+              <span>
+                <FaUserCircle size={25} />
+              </span>
+              <span>{currentUser.email}</span>
+              {dropdown && <Dropdown />}
+            </div>
+          ) : (
+            <div className="menu__header--link--item" onClick={showLogin}>
+              <span>
+                <FaUserCircle size={25} />
+              </span>
+              <span>Đăng nhập</span>
+            </div>
+          )}
         </div>
       </div>
       <div className="menu__header2">
