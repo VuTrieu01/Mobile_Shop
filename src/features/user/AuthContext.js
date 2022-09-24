@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
     return firebase.signOut(auth);
   }
 
-  function updatePassword(password) {
+  function upPassword(password) {
     return firebase.updatePassword(auth, password);
   }
 
@@ -41,7 +41,7 @@ export function AuthProvider({ children }) {
     signup,
     signIn,
     logOut,
-    updatePassword,
+    upPassword,
   };
   return (
     <AuthContext.Provider value={value}>
