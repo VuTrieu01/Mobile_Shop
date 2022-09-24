@@ -5,7 +5,7 @@ import { useAuth } from "./AuthContext";
 export default function UpdatePassword() {
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { updatePassword } = useAuth();
+  const { upPassword, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useNavigate();
@@ -15,41 +15,57 @@ export default function UpdatePassword() {
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Mật khẩu không khớp");
     }
-    try {
-      setError("");
-      setLoading(true);
-      await updatePassword(passwordRef.current.value);
-      history("/");
-    } catch (e) {
-      setError("Tạo tài khoản thất bại");
-      console.log(e);
+
+    const promises = [];
+    setLoading(true);
+    setError("");
+
+    if (passwordRef.current.value) {
+      promises.push(upPassword(passwordRef.current.value));
     }
-    setLoading(false);
+
+    Promise.all(promises)
+      .then(() => {
+        history("/");
+      })
+      .catch((e) => {
+        console.log(e);
+        setError("Cập nhật mật khẩu thất bại");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   return (
     <>
-      <div className="login__fields">
-        <form className="login__fields--item" onSubmit={handleSubmit}>
-          <h1>Đăng ký</h1>
-          {error === "" ? null : <h4>{error}</h4>}
+      <div className="updatePass">
+        <div className="updatePass__fields">
+          <form className="updatePass__fields--item" onSubmit={handleSubmit}>
+            <h1>Cập nhật mật khẩu</h1>
+            {error === "" ? null : <h4>{error}</h4>}
+            <h3>
+              <label>Email</label>
+              <input value={currentUser.email} disabled="false" />
+            </h3>
 
-          <p>
-            <label>Mật khẩu</label>
-            <input type="password" placeholder="Mật khẩu" ref={passwordRef} />
-          </p>
-          <p>
-            <label>Nhập lại mật khẩu</label>
-            <input
-              type="password"
-              placeholder="Nhập lại mật khẩu"
-              ref={passwordConfirmRef}
-            />
-          </p>
-          <button type="submit" disabled={loading}>
-            Đăng kí
-          </button>
-        </form>
+            <h3>
+              <label>Nhập mật khẩu mới</label>
+              <input type="password" placeholder="Mật khẩu" ref={passwordRef} />
+            </h3>
+            <h3>
+              <label>Nhập lại mật khẩu mới</label>
+              <input
+                type="password"
+                placeholder="Nhập lại mật khẩu"
+                ref={passwordConfirmRef}
+              />
+            </h3>
+            <button type="submit" disabled={loading}>
+              Cập nhật
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );
