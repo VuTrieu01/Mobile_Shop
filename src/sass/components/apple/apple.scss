@@ -1,11 +1,10 @@
 .container {
-  position: relative;
-  height: 450px;
+  margin-top: 15px;
+  height: auto;
   width: 90%;
   box-sizing: border-box;
-  margin-top: 35px;
   box-shadow: 3px 5px 8px 5px rgb(234, 233, 233);
-  background-color: rgb(254, 254, 254);
+  background-color: rgb(255, 255, 255);
   h1 {
     display: flex;
     justify-content: center;
@@ -17,6 +16,7 @@
     flex-wrap: wrap;
     margin: 30px 30px;
     justify-content: space-between;
+    padding-block: 20px;
   }
 }
 .item {
@@ -46,41 +46,154 @@
 }
 
 .item:hover {
+  background-color: rgb(253, 255, 184);
   border: 1px solid black;
+  transition: 0.6s;
+  cursor: pointer;
 }
 
 .product__container {
-  margin: 35px auto;
-  position: relative;
+  margin: 100px auto;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
   width: 90%;
-  height: 3000px;
-  background-color: rgb(202, 202, 202);
+  background-color: rgb(255, 255, 255);
   box-sizing: border-box;
 
   &--items {
-    height: 120px;
-    width: 33.33%;
     display: flex;
-    justify-content: space-between;
-    margin: 20px 50px;
+    justify-content: center;
+    height: 510px;
+    margin: 30px auto;
   }
 }
 
 .product__item {
-  display: flex;
-  flex-direction: column;
+  border-radius: 10px;
+  padding: 20px;
 }
 
-.product__img {
-  height: 90%;
-  width: 80%;
+.product__item .product__img {
+  position: relative;
+  margin-left: 30px;
+}
+.product__item:hover {
+  box-shadow: $box-shadow;
+  transition: 0.7s;
+  cursor: pointer;
 }
 
-button {
-  padding: 6px 10px;
-  margin: 5px 5px;
+.product__item:hover .form-button {
+  opacity: 1;
+  visibility: visible;
+  cursor: pointer;
+}
+
+.product__item:hover .product__img {
+  transform: scale(103%);
+  transition: 0.5s;
+}
+
+.button {
+  flex: 1;
+  padding: 12px 17px;
+  margin: 5px 0;
   font-size: 12px;
   background-color: rgb(234, 234, 234);
   font-weight: bold;
   border-radius: 7px;
+  background-color: $bg-button;
+  border: none;
+}
+
+.button:hover {
+  background-color: black;
+  color: white;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 9px 0;
+}
+
+h3:hover {
+  color: blue;
+  cursor: pointer;
+}
+.desc__item {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 5px;
+  font-size: 18px;
+  font-style: italic;
+  color: $des-product;
+}
+span {
+  padding-inline-end: 7px;
+}
+span:hover {
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+h2 {
+  color: rgb(212, 5, 5);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 900;
+}
+
+.active {
+  background-color: black;
+  color: white;
+}
+
+.form-button {
+  display: flex;
+  justify-content: center;
+  opacity: 1;
+  visibility: hidden;
+  margin-top: 20px;
+}
+
+.btn-buy {
+  margin-right: 5px;
+  flex: 1;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: $btn-buy;
+}
+.btn-compare {
+  margin-left: 5px;
+  flex: 1;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 7px;
+  background-color: $btn-compare;
+}
+
+.btn-buy i {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.btn-compare i {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.btn-buy:hover {
+  background-color: $btn-buyhover;
+  cursor: pointer;
+}
+
+.btn-compare:hover {
+  background-color: $btn-comparehover;
+  cursor: pointer;
 }
