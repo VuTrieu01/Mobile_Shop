@@ -7,9 +7,11 @@
   justify-content: center;
   align-items: center;
   &__fields {
+    display: flex;
+    flex-wrap: wrap;
     background-color: $main-background;
-    width: 500px;
-    height: 500px;
+    align-items: center;
+    justify-content: center;
     padding: 5px;
     border-radius: 5px;
     &--icon {
@@ -25,6 +27,8 @@
       flex-direction: column;
       align-items: center;
       padding-right: 30px;
+      padding-block: 30px;
+      width: 500px;
       h1 {
         margin-block: 0;
         margin-left: 30px;
@@ -75,6 +79,11 @@
       }
       span {
         cursor: pointer;
+        margin-left: 30px;
+        margin-bottom: 10px;
+      }
+      span:hover {
+        color: $main-menu;
       }
     }
   }

@@ -23,6 +23,10 @@ export function AuthProvider({ children }) {
     return firebase.signOut(auth);
   }
 
+  function updatePassword(password) {
+    return firebase.updatePassword(auth, password);
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setLoading(false);
@@ -37,6 +41,7 @@ export function AuthProvider({ children }) {
     signup,
     signIn,
     logOut,
+    updatePassword,
   };
   return (
     <AuthContext.Provider value={value}>
