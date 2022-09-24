@@ -1,0 +1,206 @@
+.container {
+  margin: 30px auto;
+  width: 90%;
+  box-shadow: 3px 5px 8px 5px rgb(234, 233, 233);
+  background-color: rgb(255, 255, 255);
+  h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+  }
+  &__box {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    padding: 35px;
+
+    &--item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      margin-bottom: 25px;
+      span {
+        position: absolute;
+        display: block;
+        top: 145px;
+        bottom: 0;
+        font-size: 18px;
+        color: $main-text;
+        font-weight: 500;
+      }
+    }
+  }
+  &__banner {
+    width: 100%;
+  }
+}
+.item {
+  display: flex;
+  margin: 15px 20px;
+  align-items: center;
+  padding: 34px;
+  height: 50px;
+  width: 50px;
+  border: 1px solid rgb(158, 158, 158);
+  border-radius: 50%;
+  flex-direction: column;
+}
+
+.img {
+  padding: 30px;
+}
+
+.item:hover {
+  background-color: rgb(253, 255, 184);
+  border: 1px solid black;
+  transition: 0.6s;
+  cursor: pointer;
+}
+
+.product__container {
+  margin: 100px auto;
+  width: 90%;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  background-color: rgb(255, 255, 255);
+  box-sizing: border-box;
+
+  &--items {
+    display: flex;
+    justify-content: center;
+    height: 510px;
+    margin: 30px auto;
+  }
+}
+
+.product__item {
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.product__item .product__img {
+  position: relative;
+  margin-left: 30px;
+}
+.product__item:hover {
+  box-shadow: $box-shadow;
+  transition: 0.7s;
+  cursor: pointer;
+}
+
+.product__item:hover .product__img {
+  transform: scale(103%);
+  transition: 0.5s;
+}
+
+.button__type {
+  flex: 1;
+  padding: 12px 17px;
+  margin: 5px 0;
+  font-size: 12px;
+  background-color: rgb(234, 234, 234);
+  font-weight: bold;
+  border-radius: 7px;
+  background-color: $bg-button;
+  border: none;
+}
+
+.active {
+  background-color: black;
+  color: white;
+}
+
+.button__type:hover {
+  background-color: black;
+  color: white;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 9px 0;
+}
+
+h3:hover {
+  color: blue;
+  cursor: pointer;
+}
+.desc__item {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 5px;
+  font-size: 18px;
+  font-style: italic;
+  color: $des-product;
+}
+.desc__item span {
+  padding-inline-end: 7px;
+}
+.desc__item span:hover {
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+h2 {
+  color: rgb(212, 5, 5);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 900;
+}
+
+.form-button {
+  display: flex;
+  justify-content: center;
+  opacity: 1;
+  visibility: hidden;
+  margin-top: 20px;
+}
+
+.btn-buy {
+  margin-right: 5px;
+  flex: 1;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: $btn-buy;
+}
+.btn-compare {
+  margin-left: 5px;
+  flex: 1;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 7px;
+  background-color: $btn-compare;
+}
+
+.btn-buy i {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.btn-compare i {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.btn-buy:hover {
+  background-color: $btn-buyhover;
+  cursor: pointer;
+}
+
+.btn-compare:hover {
+  background-color: $btn-comparehover;
+  cursor: pointer;
+}
+
+.product__item:hover .form-button {
+  opacity: 1;
+  visibility: visible;
+  cursor: pointer;
+}
