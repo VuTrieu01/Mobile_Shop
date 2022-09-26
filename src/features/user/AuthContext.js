@@ -23,8 +23,8 @@ export function AuthProvider({ children }) {
     return firebase.signOut(auth);
   }
 
-  function upPassword(password) {
-    return firebase.updatePassword(auth, password);
+  function updatePassword(password) {
+    return firebase.updatePassword(currentUser, password);
   }
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export function AuthProvider({ children }) {
     signup,
     signIn,
     logOut,
-    upPassword,
+    updatePassword,
   };
   return (
     <AuthContext.Provider value={value}>

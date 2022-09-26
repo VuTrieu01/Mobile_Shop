@@ -12,11 +12,28 @@ import { FiHeadphones, FiSmartphone } from "react-icons/fi";
 import { RiMacLine, RiMacbookFill } from "react-icons/ri";
 import { GiCharging } from "react-icons/gi";
 import { CgScreen } from "react-icons/cg";
+import { database, ref } from "../../firebase";
+import { useState, useEffect } from "react";
+import { onValue } from "firebase/database";
+
 export default function Apple() {
+  const [apple, setApple] = useState([]);
+
+  useEffect(() => {
+    onValue(ref(database), (snapshot) => {
+      const data = snapshot.val();
+      if (data !== null) {
+        Object.values(data).map((apple) => {
+          setApple((oldArray) => [...oldArray, apple]);
+        });
+      }
+    });
+  }, []);
+
   return (
     <>
       <div className="container">
-        <div className="container__bannner">
+        <div className="container__banner">
           <Link to="/">
             <img src={banner} alt=""></img>
           </Link>
@@ -99,7 +116,40 @@ export default function Apple() {
       </div>
 
       <div className="product__container">
-        <div className="product__container--items">
+        {apple.map((item, index) => (
+          <div className="product__container--items" key={index}>
+            {item.map((iApple) => (
+              <div className="product__item" key={iApple.id}>
+                <Link to="/">
+                  <img className="product__img" src={iApple.image} alt="" />
+                </Link>
+                <h3>{iApple.name}</h3>
+                <div className="type">
+                  <button className="button__type active">128GB</button>
+                  <button className="button__type">256GB</button>
+                  <button className="button__type">512GB</button>
+                  <button className="button__type">1TB</button>
+                </div>
+                <h2>{iApple.price} đ</h2>
+                <div className="desc__item">
+                  <span>Apple 16 Bionic |</span>
+                  <span>6.1 inch |</span>
+                  <span>128 gb</span>
+                </div>
+                <div className="form-button">
+                  <button className="btn-buy">
+                    <i>Mua ngay</i>
+                  </button>
+                  <button className="btn-compare">
+                    <i>So sánh</i>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
+
+        {/* <div className="product__container--items">
           <div className="product__item">
             <Link to="/">
               <img className="product__img" src={product2} alt="" />
@@ -325,7 +375,7 @@ export default function Apple() {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

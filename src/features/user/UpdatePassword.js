@@ -5,12 +5,12 @@ import { useAuth } from "./AuthContext";
 export default function UpdatePassword() {
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { upPassword, currentUser } = useAuth();
+  const { currentUser, updatePassword } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useNavigate();
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Mật khẩu không khớp");
@@ -21,7 +21,7 @@ export default function UpdatePassword() {
     setError("");
 
     if (passwordRef.current.value) {
-      promises.push(upPassword(passwordRef.current.value));
+      promises.push(updatePassword(passwordRef.current.value));
     }
 
     Promise.all(promises)
@@ -34,6 +34,7 @@ export default function UpdatePassword() {
       })
       .finally(() => {
         setLoading(false);
+        history("/");
       });
   }
 
