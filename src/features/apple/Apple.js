@@ -12,22 +12,28 @@ import { FiHeadphones, FiSmartphone } from "react-icons/fi";
 import { RiMacLine, RiMacbookFill } from "react-icons/ri";
 import { GiCharging } from "react-icons/gi";
 import { CgScreen } from "react-icons/cg";
-import { database, ref } from "../../firebase";
-import { useState, useEffect } from "react";
-import { onValue } from "firebase/database";
+import { database } from "../../firebase";
+import { useState } from "react";
+import { child, get, ref } from "firebase/database";
+import { useEffect } from "react";
 
 export default function Apple() {
   const [apple, setApple] = useState([]);
 
+  const dbRef = ref(database);
+
   useEffect(() => {
-    onValue(ref(database), (snapshot) => {
-      const data = snapshot.val();
-      if (data !== null) {
-        Object.values(data).map((apple) => {
-          setApple((oldArray) => [...oldArray, apple]);
-        });
-      }
-    });
+    get(child(dbRef, `Products`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setApple(snapshot.val());
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (
@@ -114,268 +120,40 @@ export default function Apple() {
           </div>
         </div>
       </div>
-
+      <div className="route">
+        <h6>Home / Tất cả sản phẩm</h6>
+      </div>
       <div className="product__container">
         {apple.map((item, index) => (
           <div className="product__container--items" key={index}>
-            {item.map((iApple) => (
-              <div className="product__item" key={iApple.id}>
-                <Link to="/">
-                  <img className="product__img" src={iApple.image} alt="" />
-                </Link>
-                <h3>{iApple.name}</h3>
-                <div className="type">
-                  <button className="button__type active">128GB</button>
-                  <button className="button__type">256GB</button>
-                  <button className="button__type">512GB</button>
-                  <button className="button__type">1TB</button>
-                </div>
-                <h2>{iApple.price} đ</h2>
-                <div className="desc__item">
-                  <span>Apple 16 Bionic |</span>
-                  <span>6.1 inch |</span>
-                  <span>128 gb</span>
-                </div>
-                <div className="form-button">
-                  <button className="btn-buy">
-                    <i>Mua ngay</i>
-                  </button>
-                  <button className="btn-compare">
-                    <i>So sánh</i>
-                  </button>
-                </div>
+            <div className="product__item" key={item.id}>
+              <Link
+                to={`/apple/${item.name}`}
+                state={{ data: item }}
+                className="link"
+              >
+                <img className="product__img" src={item.image} alt="" />
+                <h3>{item.name}</h3>
+              </Link>
+              {/* <div className="type">
+                <button className="button__type active">{item.type1}</button>
+                <button className="button__type">{item.type2}</button>
+                <button className="button__type">{item.type3}</button>
+                <button className="button__type">{item.type4}</button>
+              </div> */}
+              <h2>Giá bán: {item.price} đ</h2>
+
+              <div className="form-button">
+                <button className="btn-buy">
+                  <i>Mua ngay</i>
+                </button>
+                <button className="btn-add">
+                  <i>Thêm vào giỏ hàng</i>
+                </button>
               </div>
-            ))}
+            </div>
           </div>
         ))}
-
-        {/* <div className="product__container--items">
-          <div className="product__item">
-            <Link to="/">
-              <img className="product__img" src={product2} alt="" />
-            </Link>
-            <h3>iPhone 14 Promax</h3>
-            <div className="type">
-              <button className="button__type active">128GB</button>
-              <button className="button__type">256GB</button>
-              <button className="button__type">512GB</button>
-              <button className="button__type">1TB</button>
-            </div>
-            <h2>30.900.900 đ</h2>
-            <div className="desc__item">
-              <span>Apple 16 Bionic |</span>
-              <span>6.1 inch |</span>
-              <span>128 gb</span>
-            </div>
-            <div className="form-button">
-              <button className="btn-buy">
-                <i>Mua ngay</i>
-              </button>
-              <button className="btn-compare">
-                <i>So sánh</i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="product__container--items">
-          <div className="product__item">
-            <Link to="/">
-              <img className="product__img" src={product2} alt="" />
-            </Link>
-            <h3>iPhone 14 Promax</h3>
-            <div className="type">
-              <button className="button__type active">128GB</button>
-              <button className="button__type">256GB</button>
-              <button className="button__type">512GB</button>
-              <button className="button__type">1TB</button>
-            </div>
-            <h2>30.900.900 đ</h2>
-            <div className="desc__item">
-              <span>Apple 16 Bionic |</span>
-              <span>6.1 inch |</span>
-              <span>128 gb</span>
-            </div>
-            <div className="form-button">
-              <button className="btn-buy">
-                <i>Mua ngay</i>
-              </button>
-              <button className="btn-compare">
-                <i>So sánh</i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="product__container--items">
-          <div className="product__item">
-            <Link to="/">
-              <img className="product__img" src={product2} alt="" />
-            </Link>
-            <h3>iPhone 14 Promax</h3>
-            <div className="type">
-              <button className="button__type active">128GB</button>
-              <button className="button__type">256GB</button>
-              <button className="button__type">512GB</button>
-              <button className="button__type">1TB</button>
-            </div>
-            <h2>30.900.900 đ</h2>
-            <div className="desc__item">
-              <span>Apple 16 Bionic |</span>
-              <span>6.1 inch |</span>
-              <span>128 gb</span>
-            </div>
-            <div className="form-button">
-              <button className="btn-buy">
-                <i>Mua ngay</i>
-              </button>
-              <button className="btn-compare">
-                <i>So sánh</i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="product__container--items">
-          <div className="product__item">
-            <Link to="/">
-              <img className="product__img" src={product2} alt="" />
-            </Link>
-            <h3>iPhone 14 Promax</h3>
-            <div className="type">
-              <button className="button__type active">128GB</button>
-              <button className="button__type">256GB</button>
-              <button className="button__type">512GB</button>
-              <button className="button__type">1TB</button>
-            </div>
-            <h2>30.900.900 đ</h2>
-            <div className="desc__item">
-              <span>Apple 16 Bionic |</span>
-              <span>6.1 inch |</span>
-              <span>128 gb</span>
-            </div>
-            <div className="form-button">
-              <button className="btn-buy">
-                <i>Mua ngay</i>
-              </button>
-              <button className="btn-compare">
-                <i>So sánh</i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="product__container--items">
-          <div className="product__item">
-            <Link to="/">
-              <img className="product__img" src={product2} alt="" />
-            </Link>
-            <h3>iPhone 14 Promax</h3>
-            <div className="type">
-              <button className="button__type active">128GB</button>
-              <button className="button__type">256GB</button>
-              <button className="button__type">512GB</button>
-              <button className="button__type">1TB</button>
-            </div>
-            <h2>30.900.900 đ</h2>
-            <div className="desc__item">
-              <span>Apple 16 Bionic |</span>
-              <span>6.1 inch |</span>
-              <span>128 gb</span>
-            </div>
-            <div className="form-button">
-              <button className="btn-buy">
-                <i>Mua ngay</i>
-              </button>
-              <button className="btn-compare">
-                <i>So sánh</i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="product__container--items">
-          <div className="product__item">
-            <Link to="/">
-              <img className="product__img" src={product2} alt="" />
-            </Link>
-            <h3>iPhone 14 Promax</h3>
-            <div className="type">
-              <button className="button__type active">128GB</button>
-              <button className="button__type">256GB</button>
-              <button className="button__type">512GB</button>
-              <button className="button__type">1TB</button>
-            </div>
-            <h2>30.900.900 đ</h2>
-            <div className="desc__item">
-              <span>Apple 16 Bionic |</span>
-              <span>6.1 inch |</span>
-              <span>128 gb</span>
-            </div>
-            <div className="form-button">
-              <button className="btn-buy">
-                <i>Mua ngay</i>
-              </button>
-              <button className="btn-compare">
-                <i>So sánh</i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="product__container--items">
-          <div className="product__item">
-            <Link to="/">
-              <img className="product__img" src={product2} alt="" />
-            </Link>
-            <h3>iPhone 14 Promax</h3>
-            <div className="type">
-              <button className="button__type active">128GB</button>
-              <button className="button__type">256GB</button>
-              <button className="button__type">512GB</button>
-              <button className="button__type">1TB</button>
-            </div>
-            <h2>30.900.900 đ</h2>
-            <div className="desc__item">
-              <span>Apple 16 Bionic |</span>
-              <span>6.1 inch |</span>
-              <span>128 gb</span>
-            </div>
-            <div className="form-button">
-              <button className="btn-buy">
-                <i>Mua ngay</i>
-              </button>
-              <button className="btn-compare">
-                <i>So sánh</i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="product__container--items">
-          <div className="product__item">
-            <Link to="/">
-              <img className="product__img" src={product2} alt="" />
-            </Link>
-            <h3>iPhone 14 Promax</h3>
-            <div className="type">
-              <button className="button__type active">128GB</button>
-              <button className="button__type">256GB</button>
-              <button className="button__type">512GB</button>
-              <button className="button__type">1TB</button>
-            </div>
-            <h2>30.900.900 đ</h2>
-            <div className="desc__item">
-              <span>Apple 16 Bionic |</span>
-              <span>6.1 inch |</span>
-              <span>128 gb</span>
-            </div>
-            <div className="form-button">
-              <button className="btn-buy">
-                <i>Mua ngay</i>
-              </button>
-              <button className="btn-compare">
-                <i>So sánh</i>
-              </button>
-            </div>
-          </div>
-        </div> */}
       </div>
     </>
   );

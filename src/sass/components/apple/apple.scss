@@ -3,6 +3,7 @@
   width: 90%;
   box-shadow: 3px 5px 8px 5px rgb(234, 233, 233);
   background-color: rgb(255, 255, 255);
+  border-radius: 7px;
   h1 {
     display: flex;
     justify-content: center;
@@ -11,8 +12,8 @@
   }
   &__box {
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto;
-    padding: 35px;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1.5rem;
 
     &--item {
       display: flex;
@@ -57,37 +58,74 @@
   &__banner {
     width: 100%;
   }
+
+  @media screen and (max-width: 600px) {
+    .container__banner {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .comtainer .container__banner img {
+    height: auto;
+    width: 100%;
+  }
+}
+
+.route h6 {
+  display: flex;
+  position: absolute;
+  margin-left: 80px;
+  font-size: 16px;
+  line-height: 0.5rem;
+  color: rgb(108, 108, 108);
+}
+.route h6:hover {
+  cursor: pointer;
 }
 
 .product__container {
   margin: 100px auto;
   width: 90%;
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.5rem;
   background-color: rgb(255, 255, 255);
   box-sizing: border-box;
+  border-radius: 7px;
+  padding: 10px;
+  overflow: hidden;
+  box-shadow: 3px 5px 8px 5px rgb(234, 233, 233);
 
   &--items {
     display: flex;
     justify-content: center;
-    height: 510px;
+    height: 440px;
     margin: 30px auto;
+    border: 0.2px solid rgb(233, 233, 233);
+    border-radius: 8px;
+    position: relative;
 
     .product__item {
       border-radius: 10px;
       padding: 20px;
 
-      .button__type {
-        flex: 1;
-        padding: 12px 17px;
-        margin: 5px 0;
-        font-size: 12px;
-        background-color: rgb(234, 234, 234);
-        font-weight: bold;
-        border-radius: 7px;
-        background-color: $bg-button;
-        border: none;
-      }
+      // .type {
+      //   display: flex;
+      // }
+
+      // .button__type {
+      //   flex: 1;
+      //   padding: 12px 17px;
+      //   margin: 5px 0;
+      //   font-size: 12px;
+      //   background-color: rgb(234, 234, 234);
+      //   font-weight: bold;
+      //   border-radius: 7px;
+      //   background-color: $bg-button;
+      //   border: none;
+      // }
 
       .active {
         background-color: black;
@@ -101,6 +139,11 @@
         cursor: pointer;
       }
 
+      .link {
+        text-decoration: none;
+        color: black;
+      }
+
       h3 {
         font-size: 20px;
         font-weight: bold;
@@ -111,23 +154,9 @@
         color: blue;
         cursor: pointer;
       }
-      .desc__item {
-        display: flex;
-        flex-wrap: wrap;
-        margin-top: 5px;
-        font-size: 18px;
-        font-style: italic;
-        color: $des-product;
-      }
-      .desc__item span {
-        padding-inline-end: 7px;
-      }
-      .desc__item span:hover {
-        color: rgb(0, 0, 0);
-        cursor: pointer;
-      }
 
       h2 {
+        margin-left: 25px;
         color: rgb(212, 5, 5);
         font-size: 20px;
         font-style: italic;
@@ -136,49 +165,45 @@
 
       .form-button {
         display: flex;
-        justify-content: center;
-        opacity: 1;
-        visibility: hidden;
-        margin-top: 20px;
-      }
 
-      .btn-buy {
-        margin-right: 5px;
-        flex: 1;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        background-color: $btn-buy;
-      }
-      .btn-compare {
-        margin-left: 5px;
-        flex: 1;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 7px;
-        background-color: $btn-compare;
-      }
+        .btn-buy {
+          margin-right: 15px;
+          width: 50%;
+          opacity: 1;
+          visibility: hidden;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          background-color: $btn-buy;
+        }
 
-      .btn-buy i {
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-      }
+        .btn-add {
+          width: 50%;
+          opacity: 1;
+          visibility: hidden;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          background-color: $btn-add;
+        }
 
-      .btn-compare i {
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-      }
+        i {
+          color: white;
+          font-size: 16px;
+          font-weight: bold;
+        }
 
-      .btn-buy:hover {
-        background-color: $btn-buyhover;
-        cursor: pointer;
-      }
+        .btn-buy:hover {
+          background-color: $btn-buyhover;
+          cursor: pointer;
+          transition: 0.5s;
+        }
 
-      .btn-compare:hover {
-        background-color: $btn-comparehover;
-        cursor: pointer;
+        .btn-add:hover {
+          background-color: $btn-addhover;
+          cursor: pointer;
+          transition: 0.5s;
+        }
       }
     }
     .product__item .product__img {
@@ -192,14 +217,27 @@
     }
 
     .product__item:hover .product__img {
-      transform: scale(103%);
-      transition: 0.5s;
+      transform: scale(108%);
+      transition: 0.9s;
     }
 
-    .product__item:hover .form-button {
+    .product__item:hover .btn-buy {
       opacity: 1;
       visibility: visible;
       cursor: pointer;
+      transition: 0.9s;
     }
+
+    .product__item:hover .btn-add {
+      opacity: 1;
+      visibility: visible;
+      cursor: pointer;
+      transition: 0.9s;
+    }
+  }
+
+  &--items:hover {
+    border-color: rgb(170, 170, 170);
+    box-shadow: $box-shadow;
   }
 }

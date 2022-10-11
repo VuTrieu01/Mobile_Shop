@@ -52,6 +52,14 @@
         color: $main-text2;
       }
     }
+
+    // @media screen and (max-width: 600px) {
+    //   .menu__header {
+    //     display: flex;
+    //     flex-wrap: wrap;
+    //     justify-content: center;
+    //   }
+    // }
   }
 
   &__header2 {

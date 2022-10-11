@@ -1,0 +1,102 @@
+.route_detail {
+  position: relative;
+  h6 {
+    position: absolute;
+    left: 17rem;
+    top: -4rem;
+    display: flex;
+    font-size: 18px;
+    line-height: 1rem;
+    color: rgb(108, 108, 108);
+  }
+
+  h6:hover {
+    cursor: pointer;
+  }
+}
+
+.containerd {
+  margin: 40px auto;
+  width: 65%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.5rem;
+  background-color: rgb(255, 255, 255);
+  box-sizing: border-box;
+  border-radius: 7px;
+  padding: 20px;
+  overflow: hidden;
+  box-shadow: 3px 5px 8px 5px rgb(234, 233, 233);
+
+  &__img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      max-width: 100%;
+      height: 55%;
+      width: auto;
+    }
+
+    @media (max-width: 768px) {
+      img {
+        height: 200px;
+        width: 210px;
+      }
+    }
+  }
+
+  &__detail {
+    height: auto;
+    width: 100%;
+    border-bottom: 1px solid rgb(184, 184, 184);
+    line-height: 0.5rem;
+    padding: 10px 0;
+
+    h2 {
+      font-size: 30px;
+      color: $main-text;
+      font-weight: bold;
+      line-height: 1.8rem;
+    }
+    h3 {
+      font-size: 25px;
+      font-weight: bold;
+      color: red;
+      padding: 30px 10px;
+      border: 1px solid black 0.4;
+      background-color: $main-background;
+      border-radius: 8px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 0.9rem;
+      color: rgb(73, 73, 73);
+    }
+
+    @media screen and (min-width: 800px) {
+      p {
+        line-height: 1.5rem;
+      }
+    }
+
+    .btn-add {
+      outline: none;
+      padding: 14px 9px;
+      border: none;
+      border-radius: 7px;
+      background-color: $main-background;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      background-color: $btn-buy;
+    }
+
+    .btn-add:hover {
+      background-color: $btn-buyhover;
+      cursor: pointer;
+      transition: 0.5s;
+    }
+  }
+}
