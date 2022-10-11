@@ -1,33 +1,9 @@
 import React from "react";
-// import { useParams } from "react-router-dom";
-// import { child, get, ref } from "firebase/database";
-// import { database } from "../../firebase";
-// import { useState } from "react";
-// import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 function DetailProduct() {
   const location = useLocation();
   const data = location.state?.data;
-  // const { productId } = useParams();
-  // const thisProduct = apple.find((prod) => prod.id === productId);
-  // const [apple, setApple] = useState([]);
-
-  // const dbRef = ref(database);
-
-  // useEffect(() => {
-  //   get(child(dbRef, `Products`))
-  //     .then((snapshot) => {
-  //       if (snapshot.exists()) {
-  //         setApple(snapshot.val());
-  //       } else {
-  //         console.log("No data available");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
   return (
     <>
       <div className="route_detail">

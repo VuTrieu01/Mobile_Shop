@@ -1,5 +1,4 @@
 import * as React from "react";
-import product2 from "../../assets/images/product1.webp";
 import banner from "../../assets/images/banner.webp";
 import { Link } from "react-router-dom";
 import { MdPhoneIphone, MdLaptopChromebook } from "react-icons/md";
@@ -127,22 +126,11 @@ export default function Apple() {
         {apple.map((item, index) => (
           <div className="product__container--items" key={index}>
             <div className="product__item" key={item.id}>
-              <Link
-                to={`/apple/${item.name}`}
-                state={{ data: item }}
-                className="link"
-              >
+              <Link to={`/apple/${item.name}`} state={{ data: item }}>
                 <img className="product__img" src={item.image} alt="" />
-                <h3>{item.name}</h3>
               </Link>
-              {/* <div className="type">
-                <button className="button__type active">{item.type1}</button>
-                <button className="button__type">{item.type2}</button>
-                <button className="button__type">{item.type3}</button>
-                <button className="button__type">{item.type4}</button>
-              </div> */}
-              <h2>Giá bán: {item.price} đ</h2>
-
+              <h3>{item.name}</h3>
+              <h2>{item.price} đ</h2>
               <div className="form-button">
                 <button className="btn-buy">
                   <i>Mua ngay</i>
