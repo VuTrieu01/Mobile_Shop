@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import { AiFillDelete } from "react-icons/ai";
+import { TiTick } from "react-icons/ti";
+import dongho from "../../assets/images/dongho.webp";
 
 export default function ShoppingCart() {
+  const [money, setMoney] = useState(50000);
+  let handleQuantity = (evt) => {
+    setMoney(50000 * evt.target.value);
+  };
+
   return (
     <div className="cart">
       <div className="cart__fields">
@@ -8,43 +16,82 @@ export default function ShoppingCart() {
         <div className="cart__fields--tb">
           <table>
             <tr>
-              <th colSpan={2}>Thông tin sản phẩm</th>
-              <th>Số lượng</th>
-              <th>Tiền</th>
-              <th>Công cụ</th>
+              <th colSpan={2}>THÔNG TIN SẢN PHẨM</th>
+              <th>SỐ LƯỢNG</th>
+              <th>THÀNH TIỀN</th>
+              <th>CÔNG CỤ</th>
             </tr>
             <tr>
-              <td>hình</td>
-              <td>tên</td>
               <td>
-                <input type="number" name="quantity" min="1" max="10" />
+                <img
+                  src={dongho}
+                  alt=""
+                  className="cart__fields--tb--image"
+                ></img>
+              </td>
+              <td className="cart__fields--tb--text">Đồng hồ</td>
+              <td>
+                <input
+                  type="number"
+                  name="quantity"
+                  min="1"
+                  max="10"
+                  defaultValue={1}
+                  onChange={handleQuantity}
+                />
               </td>
               <td>
-                <p>50000đ</p>
+                <h4>{money}đ</h4>
               </td>
               <td>
-                <button>Xóa</button>
+                <button>
+                  <AiFillDelete />
+                  Xóa
+                </button>
               </td>
             </tr>
             <tr>
-              <td>hình</td>
-              <td>tên</td>
               <td>
-                <input type="number" name="quantity" min="1" max="10" />
+                <img
+                  src={dongho}
+                  alt=""
+                  className="cart__fields--tb--image"
+                ></img>
+              </td>
+              <td className="cart__fields--tb--text">Đồng hồ</td>
+              <td>
+                <input
+                  type="number"
+                  name="quantity"
+                  min="1"
+                  max="10"
+                  defaultValue={1}
+                  onChange={handleQuantity}
+                />
               </td>
               <td>
-                <p>50000đ</p>
+                <h4>{money}đ</h4>
               </td>
               <td>
-                <button>Xóa</button>
+                <button>
+                  <AiFillDelete />
+                  Xóa
+                </button>
               </td>
             </tr>
           </table>
         </div>
         <div className="cart__fields--item">
-          <div>Tổng tiền: 50000đ</div>
-          <div>Xóa tất cả sản phẩm trong Giỏ hàng</div>
-          <button>TIẾN HÀNH ĐẶT HÀNG NGAY</button>
+          <h3>Tổng tiền: {money}</h3>
+          <h4>
+            <AiFillDelete /> Xóa tất cả sản phẩm trong Giỏ hàng
+          </h4>
+        </div>
+        <div className="cart__fields--button">
+          <button>
+            <TiTick />
+            THANH TOÁN NGAY
+          </button>
         </div>
       </div>
     </div>

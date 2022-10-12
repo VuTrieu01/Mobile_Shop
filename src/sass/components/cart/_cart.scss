@@ -9,15 +9,72 @@
     box-shadow: 3px 5px 8px 5px #eae9e9;
     h2 {
       text-align: center;
+      margin-bottom: 30px;
     }
     &--tb {
       margin: 10px;
       table,
       th,
       td {
+        text-align: center;
         padding: 10px;
-        border: 2px solid black;
+        border: 1px solid black;
         border-collapse: collapse;
+      }
+
+      &--image {
+        width: 50%;
+      }
+      &--text {
+        color: $main-menu;
+        font-weight: bold;
+      }
+      button {
+        display: flex;
+        margin: 10px;
+        border: 2px solid $main-menu;
+        border-radius: 17px;
+        padding: 10px;
+        font-weight: bold;
+        background-color: $main-menu;
+        color: $btn-text;
+      }
+      button:hover {
+        border: 2px solid $main-menu;
+        background-color: $btn-text;
+        color: $main-menu;
+      }
+    }
+
+    &--item {
+      text-align: right;
+      margin: 10px;
+      h4 {
+        display: flex;
+        justify-content: right;
+        color: $main-menu;
+      }
+      h4:hover {
+        color: #0b76e1;
+      }
+    }
+
+    &--button {
+      display: flex;
+      justify-content: center;
+      button {
+        border: 2px solid $main-menu;
+        border-radius: 17px;
+        padding: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        background-color: $main-menu;
+        color: $btn-text;
+      }
+      button:hover {
+        border: 2px solid $main-menu;
+        background-color: $btn-text;
+        color: $main-menu;
       }
     }
   }
