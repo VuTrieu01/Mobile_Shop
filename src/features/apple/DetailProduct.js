@@ -19,8 +19,8 @@ function DetailProduct() {
             <h3>Giá bán: {data.price}đ</h3>
             <p>{data.desc2}</p>
             <p>{data.cam1}</p>
-            <p> {data.cam2}</p>
-            <p> {data.ram}</p>
+            <p>{data.cam2}</p>
+            <p>{data.ram}</p>
             <p>{data.type1}</p>
             <p>{data.type2}</p>
             <p>{data.type3}</p>

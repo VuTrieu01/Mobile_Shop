@@ -1,45 +1,42 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  CgSearch,
-  CgShoppingCart,
-  CgSmartphone,
-  CgLaptop,
-} from "react-icons/cg";
-import { FaUserCircle, FaApple } from "react-icons/fa";
-import { RiComputerFill } from "react-icons/ri";
-import { AiOutlineReload } from "react-icons/ai";
-import logo from "../assets/images/logo-fpt-shop.png";
+import { CgSearch, CgShoppingCart } from "react-icons/cg";
+import { FaUserCircle } from "react-icons/fa";
+import { AiFillHome } from "react-icons/ai";
+import logo from "../assets/images/logo.png";
 import SignIn from "../features/user/SignIn";
 import Dropdown from "./Dropdown";
 import { useAuth } from "../features/user/AuthContext";
+import { BsFillLaptopFill } from "react-icons/bs";
+import { MdLibraryBooks } from "react-icons/md";
+import { AiFillPhone, AiFillBell } from "react-icons/ai";
 
 export default function Navbar() {
   const menu = [
     {
-      path: "phone",
-      name: "ĐIỆN THOẠI",
-      icon: <CgSmartphone size={25} />,
+      path: "/",
+      name: "TRANG CHỦ",
+      icon: <AiFillHome size={25} />,
     },
     {
-      path: "laptop",
-      name: "LAPTOP",
-      icon: <CgLaptop size={25} />,
+      path: "gioithieu",
+      name: "GIỚI THIỆU",
+      icon: <MdLibraryBooks size={25} />,
     },
     {
-      path: "apple",
-      name: "APPLE",
-      icon: <FaApple size={25} />,
+      path: "sanpham",
+      name: "SẢN PHẨM",
+      icon: <BsFillLaptopFill size={25} />,
     },
     {
-      path: "pc",
-      name: "PC - LINH KIỆN",
-      icon: <RiComputerFill size={25} />,
+      path: "tintuc",
+      name: "TIN TỨC",
+      icon: <AiFillBell size={25} />,
     },
     {
-      path: "oldMachine",
-      name: "MÁY CŨ GIÁ RẺ",
-      icon: <AiOutlineReload size={25} />,
+      path: "lienhe",
+      name: "LIÊN HỆ",
+      icon: <AiFillPhone size={25} />,
     },
   ];
   const [login, setLogin] = useState(false);
@@ -68,12 +65,12 @@ export default function Navbar() {
           </div>
         </div>
         <div className="menu__header--link">
-          <div className="menu__header--link--item">
+          <Link to="shoppingCart" className="menu__header--link--item">
             <span>
               <CgShoppingCart size={25} />
             </span>
             <span>Giỏ hàng</span>
-          </div>
+          </Link>
           {currentUser ? (
             <div
               className="menu__header--link--item"

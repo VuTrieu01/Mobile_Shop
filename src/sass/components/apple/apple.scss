@@ -1,19 +1,25 @@
 .container {
-  margin: 30px auto;
+  margin: 0px auto;
   width: 90%;
-  box-shadow: 3px 5px 8px 5px rgb(234, 233, 233);
+  box-shadow: $box-shawdow2;
   background-color: rgb(255, 255, 255);
   border-radius: 7px;
+  z-index: 0;
+
+  &__banner {
+    margin: 30px auto 20px auto;
+    width: 100%;
+  }
   h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 15px;
   }
   &__box {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
     gap: 1.5rem;
+    padding: 20px;
 
     &--item {
       display: flex;
@@ -28,7 +34,7 @@
         top: 145px;
         bottom: 0;
         font-size: 18px;
-        color: $main-text;
+        color: $text;
         font-weight: 500;
       }
       .item {
@@ -55,9 +61,6 @@
       }
     }
   }
-  &__banner {
-    width: 100%;
-  }
 
   @media screen and (max-width: 600px) {
     .container__banner {
@@ -79,7 +82,7 @@
   margin-left: 80px;
   font-size: 16px;
   line-height: 0.5rem;
-  color: rgb(108, 108, 108);
+  color: $main-text2;
 }
 .route h6:hover {
   cursor: pointer;
@@ -96,7 +99,7 @@
   border-radius: 7px;
   padding: 10px;
   overflow: hidden;
-  box-shadow: 3px 5px 8px 5px rgb(234, 233, 233);
+  box-shadow: $box-shawdow2;
 
   &--items {
     display: flex;
@@ -171,7 +174,7 @@
           width: 50%;
           opacity: 1;
           visibility: hidden;
-          padding: 10px 20px;
+          padding: 7px 15px;
           border: none;
           border-radius: 5px;
           background-color: $btn-buy;
@@ -181,7 +184,7 @@
           width: 50%;
           opacity: 1;
           visibility: hidden;
-          padding: 10px 20px;
+          padding: 7px 15px;
           border: none;
           border-radius: 5px;
           background-color: $btn-add;

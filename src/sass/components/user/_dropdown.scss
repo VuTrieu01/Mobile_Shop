@@ -19,7 +19,7 @@
     cursor: pointer;
   }
   &--item:hover {
-    color: #fff;
-    background-color: $main-text2;
+    color: $main-text2;
+    background-color: $main-menu;
   }
 }

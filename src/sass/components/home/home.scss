@@ -1,0 +1,105 @@
+.home {
+  background-color: rgb(255, 255, 255);
+  &__info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 30px auto;
+    &--item {
+      display: flex;
+      align-items: center;
+      width: 320px;
+      height: 100px;
+      border: 1px solid rgb(219, 219, 219);
+      background-color: inherit;
+      padding: 13px;
+      border-radius: 18px;
+      margin-right: 15px;
+    }
+
+    &--item:hover {
+      border-color: rgb(255, 172, 120);
+    }
+  }
+  &-icon {
+    margin-right: 30px;
+    color: rgb(76, 75, 75);
+  }
+
+  &-prop {
+    h6 {
+      font-size: 15px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    p {
+      font-size: 13px;
+      line-height: 1.3rem;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin-top: 0;
+    }
+  }
+  h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+  }
+
+  &__product {
+    background-color: rgb(255, 255, 255);
+    margin: 10px auto;
+    width: 100%;
+    background-color: inherit;
+    border-radius: 7px;
+    z-index: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(23rem, 1fr));
+    gap: 1.5rem;
+
+    &--item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    &--item:hover .btn-add {
+      display: block;
+      opacity: 1;
+      overflow: visible;
+      transition: 0.3s;
+    }
+
+    &--img {
+      background-color: inherit;
+      height: auto;
+      width: auto;
+      h2,
+      h3 {
+        display: flex;
+        justify-content: center;
+        align-self: center;
+      }
+
+      .btn-add {
+        border: 1px solid rgb(255, 255, 255);
+        background: #fff;
+        position: absolute;
+        bottom: 130px;
+        right: 45%;
+        overflow: hidden;
+        opacity: 0;
+      }
+
+      .btn-add:hover {
+        transform: scale(125%);
+        transition: 0.3s;
+        border-color: rgb(0, 0, 0);
+        background-color: rgb(240, 240, 240);
+      }
+    }
+  }
+}

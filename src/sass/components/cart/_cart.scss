@@ -1,0 +1,24 @@
+.cart {
+  display: flex;
+  justify-content: center;
+  &__fields {
+    background-color: $btn-text;
+    border-radius: 5px;
+    padding: 50px;
+    margin: 20px;
+    box-shadow: 3px 5px 8px 5px #eae9e9;
+    h2 {
+      text-align: center;
+    }
+    &--tb {
+      margin: 10px;
+      table,
+      th,
+      td {
+        padding: 10px;
+        border: 2px solid black;
+        border-collapse: collapse;
+      }
+    }
+  }
+}

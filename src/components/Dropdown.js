@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../features/user/AuthContext";
-import UpdatePassword from "../features/user/UpdatePassword";
 
 export default function Dropdown() {
   const [dropdown, setDropdown] = useState(false);
