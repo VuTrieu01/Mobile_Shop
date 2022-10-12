@@ -21,14 +21,19 @@
         border: 1px solid black;
         border-collapse: collapse;
       }
+      &--item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          width: 50%;
+        }
+        span {
+          color: $main-menu;
+          font-weight: bold;
+        }
+      }
 
-      &--image {
-        width: 50%;
-      }
-      &--text {
-        color: $main-menu;
-        font-weight: bold;
-      }
       button {
         display: flex;
         margin: 10px;
