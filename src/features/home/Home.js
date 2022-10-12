@@ -1,7 +1,9 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-import Img1 from "../../assets/images/ipad.webp";
+import Trend1 from "../../assets/images/trend1.png";
+import Trend2 from "../../assets/images/trend2.png";
+import Trend3 from "../../assets/images/trend3.png";
 import { BiRocket } from "react-icons/bi";
 import { BiCycling } from "react-icons/bi";
 import { AiOutlineGift } from "react-icons/ai";
@@ -16,7 +18,7 @@ export default function Home() {
   const dbRef = ref(database);
 
   useEffect(() => {
-    get(child(dbRef, `Products`))
+    get(child(dbRef, `ProductHome`))
       .then((snapshot) => {
         if (snapshot.exists()) {
           setApple(snapshot.val());
@@ -83,6 +85,50 @@ export default function Home() {
               </div>
             </div>
           ))}
+        </div>
+
+        <h1>XU HƯỚNG MỚI</h1>
+        <div className="home__trend">
+          <div className="home__trend--item">
+            <div className="trend__img">
+              <img src={Trend1} alt=""></img>
+            </div>
+            <div className="trend__desc">
+              <h6>Apple và một số máy khác được cập nhật IOS</h6>
+              <p>
+                Apple 3 đã bắt đầu được cập nhật IOS thông qua giao thức OTA, và
+                hiện người dùng tại Trung Quốc đã có thể tải về cài đặt.
+              </p>
+            </div>
+          </div>
+
+          <div className="home__trend--item">
+            <div className="trend__img">
+              <img src={Trend3} alt=""></img>
+            </div>
+            <div className="trend__desc">
+              <h6>Apple 8 sẽ có bản cập nhật IOS 9 Pie vào ngày 11/12</h6>
+              <p>
+                Dọn dẹp bộ nhớ trống, bản cập nhật có dung lượng thông thường
+                lớn hơn 1GB. Sạc đầy pin để quá trình cập nhật diễn ra nhanh
+                chóng, nhớ sạc pin trên 60%.
+              </p>
+            </div>
+          </div>
+
+          <div className="home__trend--item">
+            <div className="trend__img">
+              <img src={Trend2} alt=""></img>
+            </div>
+            <div className="trend__desc">
+              <h6>Smartphone tai thỏ Apple C1 tiếp tục được giảm giá tốt</h6>
+              <p>
+                Mẫu smartphone giá rẻ với thiết kế hiện đại, trẻ trung cùng
+                camera kép Apple C1 mới đây tiếp tục được giảm giá, cơ hội tốt
+                để nhiều bạn trẻ dễ dàng sở hữu máy hơn.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </>

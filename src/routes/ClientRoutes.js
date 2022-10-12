@@ -3,12 +3,12 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../features/home/Home";
 import ShoppingCart from "../features/shoppingCart/ShoppingCart";
 import Apple from "../features/apple/Apple";
-import Introduce from "../features/gioithieu/Introduce";
+import Introduce from "../features/introduce/Introduce";
 import NoMatch from "../components/NoMatch";
 import UpdatePassword from "../features/user/UpdatePassword";
 import DetailProduct from "../features/apple/DetailProduct";
-import News from "../features/tintuc/News";
-import Contact from "../features/lienhe/Contact";
+import News from "../features/new/News";
+import Contact from "../features/contact/Contact";
 export default function ClientRoutes() {
   return (
     <Routes>
