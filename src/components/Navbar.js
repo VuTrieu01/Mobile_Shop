@@ -11,7 +11,7 @@ import { BsFillLaptopFill } from "react-icons/bs";
 import { MdLibraryBooks } from "react-icons/md";
 import { AiFillPhone, AiFillBell } from "react-icons/ai";
 import { database } from "../firebase";
-import { child, get, ref } from "firebase/database";
+import { child, get, onValue, ref } from "firebase/database";
 
 export default function Navbar() {
   const menu = [
@@ -56,7 +56,7 @@ export default function Navbar() {
     get(child(dbRef, `/${currentUser.uid}`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          setProduct(snapshot.val());
+          setProduct(Object.values(snapshot.val()));
         } else {
           console.log("No data available");
         }
@@ -65,8 +65,7 @@ export default function Navbar() {
         console.error(error);
       });
   }, []);
-  const a = product.length;
-  console.log(a);
+
   return (
     <div className="menu">
       <SignIn login={login} showLogin={showLogin} />
@@ -90,7 +89,14 @@ export default function Navbar() {
             <span>
               <CgShoppingCart size={25} />
             </span>
-            <span className="menu__header--link--item--cart">0</span>
+            {product.length === 0 ? (
+              <span></span>
+            ) : (
+              <span className="menu__header--link--item--cart">
+                {product.length}
+              </span>
+            )}
+
             <span>Giỏ hàng</span>
           </Link>
           {currentUser ? (
@@ -123,7 +129,6 @@ export default function Navbar() {
           </Link>
         ))}
       </div>
-      but
     </div>
   );
 }

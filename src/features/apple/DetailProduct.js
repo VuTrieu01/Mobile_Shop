@@ -1,10 +1,9 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { ref, set } from "firebase/database";
-import { getDownloadURL, ref as ref2, uploadBytes } from "firebase/storage";
 import { useAuth } from "../user/AuthContext";
 import { uid } from "uid";
-import { database, storage } from "../../firebase";
+import { database } from "../../firebase";
 
 function DetailProduct() {
   const location = useLocation();
@@ -22,6 +21,7 @@ function DetailProduct() {
     })
       .then(() => {
         console.log("Data saved successfully!");
+        window.location.reload(false);
       })
       .catch((error) => {
         console.log(error);
@@ -49,12 +49,9 @@ function DetailProduct() {
             <p>{data.type3}</p>
             <p>{data.type4}</p>
             <p>{data.pin}</p>
-            <input
-              type="button"
-              value="Thêm vào giỏ hàng"
-              className="btn-add"
-              onClick={addCart}
-            />
+            <button type="button" className="btn-add" onClick={addCart}>
+              Thêm vào giỏ hàng
+            </button>
           </div>
         </div>
       </form>

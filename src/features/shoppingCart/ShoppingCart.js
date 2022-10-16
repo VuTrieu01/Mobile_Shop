@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { TiTick } from "react-icons/ti";
-import dongho from "../../assets/images/dongho.webp";
+import { database } from "../../firebase";
+import { child, get, ref } from "firebase/database";
+import { useAuth } from "../user/AuthContext";
 
 export default function ShoppingCart() {
+  const { currentUser } = useAuth();
+  const [product, setProduct] = useState([]);
+
+  const dbRef = ref(database);
+
+  useEffect(() => {
+    get(child(dbRef, `/${currentUser.uid}`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setProduct(Object.values(snapshot.val()));
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+  console.log(product.map((item) => item.name));
   const quantity = useRef();
   function totalPrice(price, total) {
     return price * total;
@@ -26,33 +47,37 @@ export default function ShoppingCart() {
             </thead>
 
             <tbody>
-              <tr>
-                <td className="cart__fields--tb--item">
-                  <img src={dongho} alt="" />
-                  <span>Đồng hồ</span>
-                </td>
+              {product.map((item) => (
+                <tr>
+                  <td className="cart__fields--tb--item">
+                    <img src={item.image} alt="" />
+                    <span>{item.name}</span>
+                  </td>
 
-                <td>
-                  {/* <span>a</span> */}
-                  <input
-                    type="number"
-                    name="quantity"
-                    min="1"
-                    max="10"
-                    defaultValue={1}
-                  />
-                  {/* <span>-</span> */}
-                </td>
-                <td>
-                  <h4>đ</h4>
-                </td>
-                <td>
-                  <button>
-                    <AiFillDelete />
-                    Xóa
-                  </button>
-                </td>
-              </tr>
+                  <td>
+                    {/* <span>a</span> */}
+                    <input
+                      type="number"
+                      name="quantity"
+                      min="1"
+                      max="10"
+                      defaultValue={item.quantity}
+                    />
+                    {/* <span>-</span> */}
+                  </td>
+                  <td>
+                    <h4>
+                      {item.quantity} * {item.price} đ
+                    </h4>
+                  </td>
+                  <td>
+                    <button>
+                      <AiFillDelete />
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
