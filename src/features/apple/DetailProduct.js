@@ -1,9 +1,32 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { ref, set } from "firebase/database";
+import { getDownloadURL, ref as ref2, uploadBytes } from "firebase/storage";
+import { useAuth } from "../user/AuthContext";
+import { uid } from "uid";
+import { database, storage } from "../../firebase";
 
 function DetailProduct() {
   const location = useLocation();
   const data = location.state?.data;
+
+  const { currentUser } = useAuth();
+
+  const addCart = () => {
+    const uuid = uid();
+    set(ref(database, `/${currentUser.uid}` + `/${uuid}`), {
+      image: data.image,
+      name: data.name,
+      quantity: 1,
+      price: data.price,
+    })
+      .then(() => {
+        console.log("Data saved successfully!");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <>
       <div className="route_detail">
@@ -26,7 +49,12 @@ function DetailProduct() {
             <p>{data.type3}</p>
             <p>{data.type4}</p>
             <p>{data.pin}</p>
-            <button className="btn-add">Thêm vào giỏ hàng</button>
+            <input
+              type="button"
+              value="Thêm vào giỏ hàng"
+              className="btn-add"
+              onClick={addCart}
+            />
           </div>
         </div>
       </form>
