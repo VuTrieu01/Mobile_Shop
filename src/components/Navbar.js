@@ -53,17 +53,15 @@ export default function Navbar() {
   const dbRef = ref(database);
 
   useEffect(() => {
-    get(child(dbRef, `/${currentUser.uid}`))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          setProduct(Object.values(snapshot.val()));
-        } else {
-          console.log("No data available");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    onValue(child(dbRef, `/${currentUser.uid}`), (snapshot) => {
+      setProduct([]);
+      const data = snapshot.val();
+      if (data !== null) {
+        Object.values(data).map((item) => {
+          setProduct((oldArray) => [...oldArray, item]);
+        });
+      }
+    });
   }, []);
 
   return (

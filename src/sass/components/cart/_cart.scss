@@ -34,6 +34,25 @@
         }
       }
 
+      &--btn__primary {
+        border: 2px solid $main-menu;
+        border-radius: 30px;
+        padding-block: 5px;
+        padding-inline: 9px;
+        font-size: 15px;
+        font-weight: bold;
+        background-color: $main-menu;
+        color: $btn-text;
+        cursor: pointer;
+        margin: 10px;
+      }
+
+      &--btn__primary:hover {
+        border: 2px solid $main-menu;
+        background-color: $btn-text;
+        color: $main-menu;
+      }
+
       button {
         display: flex;
         margin: 10px;

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useRef } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { TiTick } from "react-icons/ti";
 import { database } from "../../firebase";
-import { child, get, ref } from "firebase/database";
+import { child, onValue, ref, remove, update } from "firebase/database";
 import { useAuth } from "../user/AuthContext";
 
 export default function ShoppingCart() {
@@ -13,23 +12,40 @@ export default function ShoppingCart() {
   const dbRef = ref(database);
 
   useEffect(() => {
-    get(child(dbRef, `/${currentUser.uid}`))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          setProduct(Object.values(snapshot.val()));
-        } else {
-          console.log("No data available");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    onValue(child(dbRef, `/${currentUser.uid}`), (snapshot) => {
+      setProduct([]);
+      const data = snapshot.val();
+      if (data !== null) {
+        Object.values(data).map((item) => {
+          setProduct((oldArray) => [...oldArray, item]);
+        });
+      }
+    });
   }, []);
-  console.log(product.map((item) => item.name));
-  const quantity = useRef();
-  function totalPrice(price, total) {
-    return price * total;
+
+  function totalPrice(quantity, price) {
+    return quantity * price;
   }
+
+  const handleDeleteCart = (item) => {
+    remove(child(dbRef, `/${currentUser.uid}` + `/${item.uuid}`));
+  };
+
+  const DecreaseQuantity = (item) => {
+    if (item.quantity === 1) {
+      remove(child(dbRef, `/${currentUser.uid}` + `/${item.uuid}`));
+    } else {
+      update(child(dbRef, `/${currentUser.uid}` + `/${item.uuid}`), {
+        quantity: item.quantity - 1,
+      });
+    }
+  };
+
+  const IncreaseQuantity = (item) => {
+    update(child(dbRef, `/${currentUser.uid}` + `/${item.uuid}`), {
+      quantity: item.quantity + 1,
+    });
+  };
 
   return (
     <div className="cart">
@@ -55,23 +71,25 @@ export default function ShoppingCart() {
                   </td>
 
                   <td>
-                    {/* <span>a</span> */}
-                    <input
-                      type="number"
-                      name="quantity"
-                      min="1"
-                      max="10"
-                      defaultValue={item.quantity}
-                    />
-                    {/* <span>-</span> */}
+                    <span
+                      className="cart__fields--tb--btn__primary"
+                      onClick={() => DecreaseQuantity(item)}
+                    >
+                      –
+                    </span>
+                    {item.quantity}
+                    <span
+                      className="cart__fields--tb--btn__primary"
+                      onClick={() => IncreaseQuantity(item)}
+                    >
+                      +
+                    </span>
                   </td>
                   <td>
-                    <h4>
-                      {item.quantity} * {item.price} đ
-                    </h4>
+                    <h4>{totalPrice(item.quantity, item.price)} đ</h4>
                   </td>
                   <td>
-                    <button>
+                    <button onClick={() => handleDeleteCart(item)}>
                       <AiFillDelete />
                       Xóa
                     </button>
