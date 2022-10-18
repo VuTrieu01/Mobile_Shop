@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
 
 import Trend1 from "../../assets/images/trend1.png";
 import Trend2 from "../../assets/images/trend2.png";
