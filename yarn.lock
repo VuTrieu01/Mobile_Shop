@@ -1954,6 +1954,11 @@
   "resolved" "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   "version" "2.0.4"
 
+"@lukeed/csprng@^1.0.0":
+  "integrity" "sha512-uSvJdwQU5nK+Vdf6zxcWAY2A8r7uqe+gePwLWzJ+fsQehq18pc0I2hJKwypZ2aLM90+Er9u1xn4iLJPZ+xlL4g=="
+  "resolved" "https://registry.npmjs.org/@lukeed/csprng/-/csprng-1.0.1.tgz"
+  "version" "1.0.1"
+
 "@nodelib/fs.scandir@2.1.5":
   "integrity" "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="
   "resolved" "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"
@@ -2292,11 +2297,6 @@
   "integrity" "sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA=="
   "resolved" "https://registry.npmjs.org/@trysound/sax/-/sax-0.2.0.tgz"
   "version" "0.2.0"
-
-"@tweenjs/tween.js@^18.6.4":
-  "integrity" "sha512-lB9lMjuqjtuJrx7/kOkqQBtllspPIN+96OvTCeJ2j5FEzinoAXTdAMFnDAQT1KVPRlnYfBrqxtqP66vDM40xxQ=="
-  "resolved" "https://registry.npmjs.org/@tweenjs/tween.js/-/tween.js-18.6.4.tgz"
-  "version" "18.6.4"
 
 "@types/aria-query@^4.2.0":
   "integrity" "sha512-HnYpAE1Y6kRyKM/XkEuiRQhTHvkzMBurTHnpFLYLBGPIylZNPs9jJcuOOYWxPLJCSEtmZT0Y8rHDokKN7rRTig=="
@@ -8811,15 +8811,7 @@
   optionalDependencies:
     "fsevents" "^2.3.2"
 
-"react-slideshow-image@^4.0.5":
-  "integrity" "sha512-TKFfK0b0YyS0DJCE2xSK64gA/mxAP4gbyAWboko4akvr0xClToflkdbBTo/9CRI6NuRIZKsy8v7g+bzpNTHWzw=="
-  "resolved" "https://registry.npmjs.org/react-slideshow-image/-/react-slideshow-image-4.0.5.tgz"
-  "version" "4.0.5"
-  dependencies:
-    "@tweenjs/tween.js" "^18.6.4"
-    "resize-observer-polyfill" "^1.5.1"
-
-"react@*", "react@^18.0.0", "react@^18.2.0", "react@>= 16", "react@>=15", "react@>=16.8":
+"react@*", "react@^18.0.0", "react@^18.2.0", "react@>= 16", "react@>=16.8":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
@@ -9032,11 +9024,6 @@
   "integrity" "sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ=="
   "resolved" "https://registry.npmjs.org/requires-port/-/requires-port-1.0.0.tgz"
   "version" "1.0.0"
-
-"resize-observer-polyfill@^1.5.1":
-  "integrity" "sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg=="
-  "resolved" "https://registry.npmjs.org/resize-observer-polyfill/-/resize-observer-polyfill-1.5.1.tgz"
-  "version" "1.5.1"
 
 "resolve-cwd@^3.0.0":
   "integrity" "sha512-OrZaX2Mb+rJCpH/6CpSqt9xFVpN++x01XnN2ie9g6P5/3xelLAkXWVADpdz1IHD/KFfEXyE6V0U01OQ3UO2rEg=="
@@ -10162,6 +10149,13 @@
   "integrity" "sha512-C0I1UsrrDHo2fYI5oaCGbSejwX4ch+9Y5jTQELvovfmFkK3HHSZJB8MSJcWLmCUBzQBchCrZ9rMRV6GuNrvGtw=="
   "resolved" "https://registry.npmjs.org/typescript/-/typescript-4.8.2.tgz"
   "version" "4.8.2"
+
+"uid@^2.0.1":
+  "integrity" "sha512-PF+1AnZgycpAIEmNtjxGBVmKbZAQguaa4pBUq6KNaGEcpzZ2klCNZLM34tsjp76maN00TttiiUf6zkIBpJQm2A=="
+  "resolved" "https://registry.npmjs.org/uid/-/uid-2.0.1.tgz"
+  "version" "2.0.1"
+  dependencies:
+    "@lukeed/csprng" "^1.0.0"
 
 "unbox-primitive@^1.0.2":
   "integrity" "sha512-61pPlCD9h51VoreyJ0BReideM3MDKMKnh6+V9L08331ipq6Q8OFXZYiqP6n/tbHx4s5I9uRhcye6BrbkizkBDw=="

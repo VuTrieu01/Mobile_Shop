@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CgSearch, CgShoppingCart } from "react-icons/cg";
 import { FaUserCircle } from "react-icons/fa";
@@ -10,6 +10,8 @@ import { useAuth } from "../features/user/AuthContext";
 import { BsFillLaptopFill } from "react-icons/bs";
 import { MdLibraryBooks } from "react-icons/md";
 import { AiFillPhone, AiFillBell } from "react-icons/ai";
+import { database } from "../firebase";
+import { child, get, onValue, ref } from "firebase/database";
 
 export default function Navbar() {
   const menu = [
@@ -46,6 +48,22 @@ export default function Navbar() {
 
   const { currentUser } = useAuth();
 
+  const [product, setProduct] = useState([]);
+
+  const dbRef = ref(database);
+
+  useEffect(() => {
+    onValue(child(dbRef, `/${currentUser.uid}`), (snapshot) => {
+      setProduct([]);
+      const data = snapshot.val();
+      if (data !== null) {
+        Object.values(data).map((item) => {
+          setProduct((oldArray) => [...oldArray, item]);
+        });
+      }
+    });
+  }, []);
+
   return (
     <div className="menu">
       <SignIn login={login} showLogin={showLogin} />
@@ -69,6 +87,14 @@ export default function Navbar() {
             <span>
               <CgShoppingCart size={25} />
             </span>
+            {product.length === 0 ? (
+              <span></span>
+            ) : (
+              <span className="menu__header--link--item--cart">
+                {product.length}
+              </span>
+            )}
+
             <span>Giỏ hàng</span>
           </Link>
           {currentUser ? (

@@ -126,10 +126,14 @@ export default function Apple() {
         {apple.map((item, index) => (
           <div className="product__container--items" key={index}>
             <div className="product__item" key={item.id}>
-              <Link to={`/sanpham/${item.name}`} state={{ data: item }}>
+              <Link
+                to={`/sanpham/${item.name}`}
+                state={{ data: item }}
+                className="link"
+              >
                 <img className="product__img" src={item.image} alt="" />
+                <h3>{item.name}</h3>
               </Link>
-              <h3>{item.name}</h3>
               <h2>{item.price} đ</h2>
               <div className="form-button">
                 <button className="btn-buy">
