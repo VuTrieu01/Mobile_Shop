@@ -9,7 +9,7 @@
   &__container {
     width: 90%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
     gap: 1.5rem;
     background-color: rgb(255, 255, 255);
     box-sizing: border-box;
@@ -19,8 +19,8 @@
     padding: 30px;
 
     &--item {
-      max-height: 450px;
-      max-width: 450px;
+      min-height: 250px;
+      min-width: 250px;
       height: 350px;
       width: auto;
       padding: 30px;
@@ -39,7 +39,7 @@
       }
 
       .new-img img {
-        width: 370px;
+        width: 350px;
         margin: auto;
         border-radius: 5px;
       }
