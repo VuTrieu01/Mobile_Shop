@@ -19,23 +19,6 @@ export default function Home() {
   const [apple, setApple] = useState([]);
   const dbRef = ref(database);
 
-  // const { currentUser } = useAuth();
-  // const location = useLocation();
-  // const data = location.state?.data;
-  // const [product, setProduct] = useState([]);
-
-  // useEffect(() => {
-  //   onValue(child(dbRef, `/${currentUser.uid}`), (snapshot) => {
-  //     setProduct([]);
-  //     const data = snapshot.val();
-  //     if (data !== null) {
-  //       Object.values(data).map((item) => {
-  //         setProduct((oldArray) => [...oldArray, item]);
-  //       });
-  //     }
-  //   });
-  // }, []);
-
   useEffect(() => {
     get(child(dbRef, `ProductHome`))
       .then((snapshot) => {
@@ -50,46 +33,6 @@ export default function Home() {
       });
   }, []);
 
-  // const addCart = () => {
-  //   const uuid = uid();
-  //   if (product.length === 0) {
-  //     set(ref(database, `/${currentUser.uid}` + `/${uuid}`), {
-  //       image: data.image,
-  //       name: data.name,
-  //       quantity: 1,
-  //       price: data.price,
-  //       uuid,
-  //     })
-  //       .then(() => {
-  //         console.log("Data saved successfully!");
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   } else {
-  //     product.map((item) => {
-  //       if (item.name === data.name) {
-  //         update(child(dbRef, `/${currentUser.uid}` + `/${item.uuid}`), {
-  //           quantity: item.quantity + 1,
-  //         });
-  //       } else {
-  //         set(ref(database, `/${currentUser.uid}` + `/${uuid}`), {
-  //           image: data.image,
-  //           name: data.name,
-  //           quantity: 1,
-  //           price: data.price,
-  //           uuid,
-  //         })
-  //           .then(() => {
-  //             console.log("Data saved successfully!");
-  //           })
-  //           .catch((error) => {
-  //             console.log(error);
-  //           });
-  //       }
-  //     });
-  //   }
-  // };
   return (
     <>
       <div className="home">

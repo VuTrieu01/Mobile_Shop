@@ -53,15 +53,19 @@ export default function Navbar() {
   const dbRef = ref(database);
 
   useEffect(() => {
-    onValue(child(dbRef, `/${currentUser.uid}`), (snapshot) => {
-      setProduct([]);
-      const data = snapshot.val();
-      if (data !== null) {
-        Object.values(data).map((item) => {
-          setProduct((oldArray) => [...oldArray, item]);
-        });
-      }
-    });
+    currentUser ? (
+      onValue(child(dbRef, `/${currentUser.uid}`), (snapshot) => {
+        setProduct([]);
+        const data = snapshot.val();
+        if (data !== null) {
+          Object.values(data).map((item) => {
+            setProduct((oldArray) => [...oldArray, item]);
+          });
+        }
+      })
+    ) : (
+      <></>
+    );
   }, []);
 
   return (

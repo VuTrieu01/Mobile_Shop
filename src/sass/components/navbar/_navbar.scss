@@ -1,9 +1,10 @@
 .menu {
   background-color: $main-menu2;
   width: 100%;
-
+  position: sticky;
   margin: 0;
   top: 0;
+  z-index: 1004;
 
   &__header {
     display: flex;

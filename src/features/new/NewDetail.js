@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { child, get, ref } from "firebase/database";
 import { useEffect } from "react";
 import { database } from "../../firebase";
 
-function News() {
-  const [New, setNew] = useState([]);
+function NewDetail() {
+  const location = useLocation();
+  const dataNew = location.state?.data;
+  const [newDetail, setNewDetail] = useState([]);
 
   const dbRef = ref(database);
 
@@ -14,7 +16,7 @@ function News() {
     get(child(dbRef, `New`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          setNew(snapshot.val());
+          setNewDetail(snapshot.val());
         } else {
           console.log("No data available");
         }
@@ -26,26 +28,22 @@ function News() {
 
   return (
     <>
-      <div className="new">
-        <h1>Tiêu đề danh mục</h1>
-        <div className="new__container">
-          {New.map((item) => (
-            <div className="new__container--item" key={item.id}>
+      <div className="newdetail">
+        <div className="newdetail__content">
+          <h1>{dataNew.title}</h1>
+          <p>{dataNew.descdetail}</p>
+        </div>
+        <div className="newdetail__link">
+          {newDetail.map((item) => (
+            <div className="newdetail__link_item" key={item.id}>
+              <img src={item.img} alt="" />
               <Link
                 to={`/tintuc/${item.id}`}
                 state={{ data: item }}
                 className="link"
               >
-                <div className="new-img">
-                  <img src={item.img} alt=""></img>
-                </div>
-                <div className="new-title">
-                  <h2>{item.title}</h2>
-                </div>
+                <p>{item.title}</p>
               </Link>
-              <div className="new-desc">
-                <p>{item.desc}</p>
-              </div>
             </div>
           ))}
         </div>
@@ -54,4 +52,4 @@ function News() {
   );
 }
 
-export default News;
+export default NewDetail;

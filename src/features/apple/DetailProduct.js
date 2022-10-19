@@ -10,28 +10,23 @@ function DetailProduct() {
   const data = location.state?.data;
 
   const { currentUser } = useAuth();
-  // const DecreaseQuantity = (item) => {
-  //   if (item.quantity === 1) {
-  //     remove(child(dbRef, `/${currentUser.uid}` + `/${item.uuid}`));
-  //   } else {
-  //     update(child(dbRef, `/${currentUser.uid}` + `/${item.uuid}`), {
-  //       quantity: item.quantity - 1,
-  //     });
-  //   }
-  // };
   const [product, setProduct] = useState([]);
 
   const dbRef = ref(database);
   useEffect(() => {
-    onValue(child(dbRef, `/${currentUser.uid}`), (snapshot) => {
-      setProduct([]);
-      const data = snapshot.val();
-      if (data !== null) {
-        Object.values(data).map((item) => {
-          setProduct((oldArray) => [...oldArray, item]);
-        });
-      }
-    });
+    currentUser ? (
+      onValue(child(dbRef, `/${currentUser.uid}`), (snapshot) => {
+        setProduct([]);
+        const data = snapshot.val();
+        if (data !== null) {
+          Object.values(data).map((item) => {
+            setProduct((oldArray) => [...oldArray, item]);
+          });
+        }
+      })
+    ) : (
+      <></>
+    );
   }, []);
 
   const addCart = () => {

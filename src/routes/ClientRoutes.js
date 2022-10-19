@@ -9,6 +9,7 @@ import UpdatePassword from "../features/user/UpdatePassword";
 import DetailProduct from "../features/apple/DetailProduct";
 import News from "../features/new/News";
 import Contact from "../features/contact/Contact";
+import NewDetail from "../features/new/NewDetail";
 export default function ClientRoutes() {
   return (
     <Routes>
@@ -16,7 +17,10 @@ export default function ClientRoutes() {
       <Route path="/updateProfile" element={<UpdatePassword />} />
       <Route path="/shoppingCart" element={<ShoppingCart />} />
       <Route path="/gioithieu" element={<Introduce />} />
-      <Route path="/tintuc" element={<News />} />
+      <Route path="/tintuc">
+        <Route index element={<News />} />
+        <Route path=":id" element={<NewDetail />} />
+      </Route>
       <Route path="/lienhe" element={<Contact />} />
       <Route path="/sanpham">
         <Route index element={<Apple />} />
