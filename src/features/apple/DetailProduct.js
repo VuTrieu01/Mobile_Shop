@@ -29,10 +29,39 @@ function DetailProduct() {
     );
   }, []);
 
+  // function equar(a, b) {
+  //   console.log(a, b);
+  //   for (let i = 0; i < a.length; i++) {
+  //     if (a[i] !== b) {
+  //       return false;
+  //     }
+  //   }
+
+  //   return true;
+  // }
+  // var s = equar(
+  //   product.map((item) => item.id),
+  //   data.id
+  // );
+  // console.log(s);
+  function equar(a, b) {
+    console.log(a, b);
+    for (let i = 0; i < a.length; i++) {
+      if (a[i] !== b) {
+        return false;
+      }
+    }
+    return true;
+  }
+  var s = equar(2, 2);
+
+  console.log(s); //  false
+
   const addCart = () => {
     const uuid = uid();
     if (product.length === 0) {
       set(ref(database, `/${currentUser.uid}` + `/${uuid}`), {
+        id: data.id,
         image: data.image,
         name: data.name,
         quantity: 1,
@@ -46,27 +75,26 @@ function DetailProduct() {
           console.log(error);
         });
     } else {
-      product.map((item) => {
-        if (item.name === data.name) {
-          update(child(dbRef, `/${currentUser.uid}` + `/${item.uuid}`), {
-            quantity: item.quantity + 1,
-          });
-        } else {
-          set(ref(database, `/${currentUser.uid}` + `/${uuid}`), {
-            image: data.image,
-            name: data.name,
-            quantity: 1,
-            price: data.price,
-            uuid,
-          })
-            .then(() => {
-              console.log("Data saved successfully!");
+      product.map((item) =>
+        item.id !== data.id
+          ? set(ref(database, `/${currentUser.uid}` + `/${uuid}`), {
+              id: data.id,
+              image: data.image,
+              name: data.name,
+              quantity: 1,
+              price: data.price,
+              uuid,
             })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-      });
+              .then(() => {
+                console.log("Data saved successfully!");
+              })
+              .catch((error) => {
+                console.log(error);
+              })
+          : update(child(dbRef, `/${currentUser.uid}` + `/${item.uuid}`), {
+              quantity: item.quantity + 1,
+            })
+      );
     }
   };
 

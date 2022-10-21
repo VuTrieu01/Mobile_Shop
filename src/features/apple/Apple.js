@@ -123,7 +123,7 @@ export default function Apple() {
           <div className="product__container--items" key={index}>
             <div className="product__item" key={item.id}>
               <Link
-                to={`/sanpham/${item.name}`}
+                to={`/sanpham/${item.id}`}
                 state={{ data: item }}
                 className="link"
               >
