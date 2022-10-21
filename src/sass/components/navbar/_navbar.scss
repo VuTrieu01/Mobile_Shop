@@ -32,12 +32,17 @@
         color: $main-text2;
         min-width: 100px;
       }
+
       &--icon {
         position: absolute;
         right: 9px;
         bottom: 2px;
         border-radius: 0px 6px 6px 0px;
         cursor: pointer;
+      }
+
+      &--icon:hover {
+        transform: scale(110%);
       }
     }
     &--link {

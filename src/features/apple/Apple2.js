@@ -17,12 +17,12 @@ import { child, get, ref } from "firebase/database";
 import { useEffect } from "react";
 
 export default function Apple() {
-  const [apple, setApple] = useState([]);
+  const [apple2, setApple] = useState([]);
 
   const dbRef = ref(database);
 
   useEffect(() => {
-    get(child(dbRef, `Products`))
+    get(child(dbRef, `Prooducts2`))
       .then((snapshot) => {
         if (snapshot.exists()) {
           setApple(snapshot.val());
@@ -117,13 +117,12 @@ export default function Apple() {
       <div className="route">
         <h6>Home / Tất cả sản phẩm</h6>
       </div>
-
       <div className="product__container">
-        {apple.map((item, index) => (
+        {apple2.map((item, index) => (
           <div className="product__container--items" key={index}>
             <div className="product__item" key={item.id}>
               <Link
-                to={`/sanpham/${item.name}`}
+                to={`/sanpham2/${item.name}`}
                 state={{ data: item }}
                 className="link"
               >
@@ -145,8 +144,13 @@ export default function Apple() {
       </div>
       <div className="button-form">
         <div className="btn-more">
-          <Link to={`/sanpham2`} className="link">
-            <button type="">More...</button>
+          <Link to={`/sanpham`} className="link">
+            <button type="">Next</button>
+          </Link>
+        </div>
+        <div className="btn-back">
+          <Link to={`/sanpham`} className="link">
+            <button type="">Previous</button>
           </Link>
         </div>
       </div>

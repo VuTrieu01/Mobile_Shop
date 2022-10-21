@@ -82,14 +82,14 @@
   margin-left: 80px;
   font-size: 16px;
   line-height: 0.5rem;
-  color: $main-text2;
+  color: $text;
 }
 .route h6:hover {
   cursor: pointer;
 }
 
 .product__container {
-  margin: 100px auto;
+  margin: 100px auto 50px auto;
   width: 90%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
@@ -104,15 +104,17 @@
   &--items {
     display: flex;
     justify-content: center;
-    height: 440px;
-    margin: 30px auto;
-    border: 0.2px solid rgb(233, 233, 233);
+    align-items: center;
+    height: fit-content;
+    margin: auto;
+    border: 0.2px solid rgb (233, 233, 233);
     border-radius: 8px;
     position: relative;
+    background-color: inherit;
 
     .product__item {
       border-radius: 10px;
-      padding: 20px;
+      padding: 40px;
 
       .active {
         background-color: black;
@@ -135,6 +137,8 @@
         font-size: 20px;
         font-weight: bold;
         margin: 9px 0;
+        display: flex;
+        justify-content: center;
       }
 
       h3:hover {
@@ -143,7 +147,8 @@
       }
 
       h2 {
-        margin-left: 25px;
+        display: flex;
+        justify-content: center;
         color: rgb(212, 5, 5);
         font-size: 20px;
         font-style: italic;
@@ -194,8 +199,15 @@
       }
     }
     .product__item .product__img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: auto;
+      max-width: 220px;
+      margin: auto;
       position: relative;
-      margin-left: 30px;
+      padding: 0;
     }
     .product__item:hover {
       box-shadow: $box-shadow;
@@ -226,5 +238,58 @@
   &--items:hover {
     border-color: rgb(170, 170, 170);
     box-shadow: $box-shadow;
+  }
+}
+
+.button-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  .btn-more {
+    margin-top: 0;
+    margin-bottom: 20px;
+    margin-right: 20px;
+  }
+
+  .btn-more button {
+    width: 100px;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    background-color: $main-menu;
+    border: none;
+    border-radius: 7px;
+  }
+
+  .btn-more button:hover {
+    background-color: blue;
+    transform: scale(103%);
+    transition: 0.3s ease-in-out;
+  }
+
+  .btn-back {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  .btn-back button {
+    width: 100px;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    background-color: $main-menu;
+    border: none;
+    border-radius: 7px;
+  }
+
+  .btn-back button:hover {
+    background-color: blue;
+    transform: scale(103%);
+    transition: 0.3s ease-in-out;
   }
 }

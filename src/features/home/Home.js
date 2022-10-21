@@ -1,10 +1,5 @@
 import * as React from "react";
-
-// import { useLocation } from "react-router-dom";
-import { child, onValue, ref, set, update, get } from "firebase/database";
-// import { useAuth } from "../user/AuthContext";
-// import { uid } from "uid";
-
+import { child, ref, get } from "firebase/database";
 import Trend1 from "../../assets/images/trend1.png";
 import Trend2 from "../../assets/images/trend2.png";
 import Trend3 from "../../assets/images/trend3.png";

@@ -84,14 +84,14 @@ function DetailProduct() {
             <h2>{data.name}</h2>
             <h3>Giá bán: {data.price}đ</h3>
             <p>{data.desc2}</p>
-            <p>{data.cam1}</p>
-            <p>{data.cam2}</p>
-            <p>{data.ram}</p>
-            <p>{data.type1}</p>
-            <p>{data.type2}</p>
-            <p>{data.type3}</p>
-            <p>{data.type4}</p>
-            <p>{data.pin}</p>
+            <p>{data.desc1}</p>
+            <p>{data.desc4}</p>
+            <p>{data.desc6}</p>
+            <p>{data.desc7}</p>
+            <p>{data.desc8}</p>
+            <p>{data.desc9}</p>
+            <p>{data.desc10}</p>
+            <p>{data.desc5}</p>
             <button type="button" className="btn-add" onClick={addCart}>
               Thêm vào giỏ hàng
             </button>
