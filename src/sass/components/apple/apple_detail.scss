@@ -50,7 +50,7 @@
 
   &__detail {
     border-bottom: 1px solid rgb(184, 184, 184);
-    line-height: 0.5rem;
+    line-height: 0.8rem;
     padding: 10px 0;
 
     h2 {
@@ -72,13 +72,13 @@
 
     p {
       font-size: 16px;
-      line-height: 0.2rem;
+      line-height: 1rem;
       color: rgb(73, 73, 73);
     }
 
-    @media screen and (min-width: 480px) {
+    @media screen and (max-width: 480px) {
       p {
-        line-height: 1rem;
+        line-height: 0.8rem;
       }
     }
 

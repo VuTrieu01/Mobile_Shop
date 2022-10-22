@@ -14,7 +14,7 @@ import Apple2 from "../features/apple/Apple2";
 export default function ClientRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/trangchu" element={<Home />} />
       <Route path="/updateProfile" element={<UpdatePassword />} />
       <Route path="/shoppingCart" element={<ShoppingCart />} />
       <Route path="/gioithieu" element={<Introduce />} />

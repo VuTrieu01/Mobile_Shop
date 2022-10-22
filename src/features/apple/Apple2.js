@@ -6,7 +6,11 @@ import {
   BsSmartwatch,
   BsFillMouseFill,
   BsFillKeyboardFill,
+  BsFacebook,
+  BsInstagram,
+  BsTwitter,
 } from "react-icons/bs";
+import { AiOutlineMail } from "react-icons/ai";
 import { FiHeadphones, FiSmartphone } from "react-icons/fi";
 import { RiMacLine, RiMacbookFill } from "react-icons/ri";
 import { GiCharging } from "react-icons/gi";
@@ -15,6 +19,12 @@ import { database } from "../../firebase";
 import { useState } from "react";
 import { child, get, ref } from "firebase/database";
 import { useEffect } from "react";
+import Iphone from "../../assets/images/apple.png";
+import Oppo from "../../assets/images/oppo.png";
+import Sony from "../../assets/images/sony.png";
+import Microsoft from "../../assets/images/microsoft.png";
+import Samsung from "../../assets/images/samsung.png";
+import logo from "../../assets/images/logo.png";
 
 export default function Apple() {
   const [apple2, setApple] = useState([]);
@@ -117,6 +127,9 @@ export default function Apple() {
       <div className="route">
         <h6>Home / Tất cả sản phẩm</h6>
       </div>
+      <div className="title">
+        <h1>Danh mục sản phẩm</h1>
+      </div>
       <div className="product__container">
         {apple2.map((item, index) => (
           <div className="product__container--items" key={index}>
@@ -143,15 +156,78 @@ export default function Apple() {
         ))}
       </div>
       <div className="button-form">
-        <div className="btn-more">
-          <Link to={`/sanpham`} className="link">
-            <button type="">Next</button>
-          </Link>
-        </div>
         <div className="btn-back">
           <Link to={`/sanpham`} className="link">
             <button type="">Previous</button>
           </Link>
+        </div>
+      </div>
+      <div className="footer">
+        <div className="footer__icon">
+          <div className="footer__icon--image">
+            <img src={Iphone} alt=""></img>
+          </div>
+          <div className="footer__icon--image">
+            <img src={Oppo} alt=""></img>
+          </div>
+          <div className="footer__icon--image">
+            <img src={Samsung} alt=""></img>
+          </div>
+          <div className="footer__icon--image">
+            <img src={Sony} alt=""></img>
+          </div>
+          <div className="footer__icon--image">
+            <img src={Microsoft} alt=""></img>
+          </div>
+        </div>
+        <div className="footer__info">
+          <div className="footer__info--contact">
+            <div className="footer__info--contact--link">
+              <img src={logo} alt=""></img>
+              <ul>
+                <li>Hà Đông, Hà Nội</li>
+                <li>0942.132.121</li>
+                <li>info.namviettech@gmail.com</li>
+              </ul>
+            </div>
+            <div className="footer__info--contact--desc">
+              <h3>Thông tin</h3>
+              <ul>
+                <Link to="/trangchu" className="link">
+                  <li>Trang chủ</li>
+                </Link>
+                <Link to="/gioithieu" className="link">
+                  <li>Giới thiệu</li>
+                </Link>
+                <Link to="/sanpham" className="link">
+                  <li>Sản phẩm</li>
+                </Link>
+                <Link to="/tintuc" className="link">
+                  <li>Tin tức</li>
+                </Link>
+                <Link to="/lienhe" className="link">
+                  <li>TLiên hệ</li>
+                </Link>
+              </ul>
+            </div>
+            <div className="footer__info--contact--connect">
+              <h3>Kết nối với chúng tôi</h3>
+              <div className="footer__info--contact--connect--icon">
+                <span>
+                  <BsFacebook size={25} />
+                </span>
+                <span>
+                  <BsInstagram size={25} />
+                </span>
+                <span>
+                  <BsTwitter size={25} />
+                </span>
+                <span>
+                  <AiOutlineMail size={25} />
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

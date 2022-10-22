@@ -119,6 +119,9 @@
     align-items: center;
     box-sizing: border-box;
     flex-wrap: wrap;
+    margin-bottom: 220px;
+    height: auto;
+    max-height: 100%;
 
     &--item {
       width: 400px;

@@ -16,7 +16,7 @@ import { child, get, onValue, ref } from "firebase/database";
 export default function Navbar() {
   const menu = [
     {
-      path: "/",
+      path: "trangchu",
       name: "TRANG CHỦ",
       icon: <AiFillHome size={25} />,
     },
