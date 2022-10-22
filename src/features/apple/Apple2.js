@@ -6,30 +6,26 @@ import {
   BsSmartwatch,
   BsFillMouseFill,
   BsFillKeyboardFill,
-  BsFacebook,
-  BsInstagram,
-  BsTwitter,
 } from "react-icons/bs";
-import { AiOutlineMail } from "react-icons/ai";
 import { FiHeadphones, FiSmartphone } from "react-icons/fi";
 import { RiMacLine, RiMacbookFill } from "react-icons/ri";
 import { GiCharging } from "react-icons/gi";
 import { CgScreen } from "react-icons/cg";
 import { database } from "../../firebase";
 import { useState } from "react";
-import { child, get, ref } from "firebase/database";
+import { child, get, onValue, ref, remove, set } from "firebase/database";
 import { useEffect } from "react";
-import Iphone from "../../assets/images/apple.png";
-import Oppo from "../../assets/images/oppo.png";
-import Sony from "../../assets/images/sony.png";
-import Microsoft from "../../assets/images/microsoft.png";
-import Samsung from "../../assets/images/samsung.png";
-import logo from "../../assets/images/logo.png";
+import { useAuth } from "../user/AuthContext";
+import { uid } from "uid";
+import { useNavigate } from "react-router-dom";
 
 export default function Apple() {
   const [apple2, setApple] = useState([]);
 
   const dbRef = ref(database);
+  const { currentUser } = useAuth();
+  const [product, setProduct] = useState([]);
+  const history = useNavigate();
 
   useEffect(() => {
     get(child(dbRef, `Prooducts2`))
@@ -44,6 +40,69 @@ export default function Apple() {
         console.error(error);
       });
   }, []);
+
+  useEffect(() => {
+    currentUser ? (
+      onValue(child(dbRef, `/${currentUser.uid}` + `/cart`), (snapshot) => {
+        setProduct([]);
+        const data = snapshot.val();
+        if (data !== null) {
+          Object.values(data).map((item) => {
+            setProduct((oldArray) => [...oldArray, item]);
+          });
+        }
+      })
+    ) : (
+      <></>
+    );
+  }, []);
+
+  const addCart = (itemCart, boolean) => {
+    const uuid = uid();
+    product.length === 0
+      ? set(ref(database, `/${currentUser.uid}` + `/cart` + `/${uuid}`), {
+          id: itemCart.id,
+          image: itemCart.image,
+          name: itemCart.name,
+          quantity: 1,
+          price: itemCart.price,
+          uuid,
+        })
+          .then(() => {
+            boolean === 0
+              ? history("/shoppingCart")
+              : console.log("Data saved successfully!");
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      : product.map((item) =>
+          item.id !== itemCart.id ? (
+            set(ref(database, `/${currentUser.uid}` + `/cart` + `/${uuid}`), {
+              id: itemCart.id,
+              image: itemCart.image,
+              name: itemCart.name,
+              quantity: 1,
+              price: itemCart.price,
+              uuid,
+            })
+              .then(() => {
+                boolean === 0
+                  ? history("/shoppingCart")
+                  : console.log("Data saved successfully!");
+              })
+              .catch((error) => {
+                console.log(error);
+              })
+          ) : product.length === 1 ? (
+            <></>
+          ) : (
+            remove(
+              child(dbRef, `/${currentUser.uid}` + `/cart` + `/${item.uuid}`)
+            )
+          )
+        );
+  };
 
   return (
     <>
@@ -135,7 +194,7 @@ export default function Apple() {
           <div className="product__container--items" key={index}>
             <div className="product__item" key={item.id}>
               <Link
-                to={`/sanpham2/${item.name}`}
+                to={`/sanpham2/${item.id}`}
                 state={{ data: item }}
                 className="link"
               >
@@ -144,10 +203,10 @@ export default function Apple() {
               </Link>
               <h2>{item.price} đ</h2>
               <div className="form-button">
-                <button className="btn-buy">
+                <button className="btn-buy" onClick={() => addCart(item, 0)}>
                   <i>Mua ngay</i>
                 </button>
-                <button className="btn-add">
+                <button className="btn-add" onClick={() => addCart(item, 1)}>
                   <i>Thêm vào giỏ hàng</i>
                 </button>
               </div>
@@ -160,74 +219,6 @@ export default function Apple() {
           <Link to={`/sanpham`} className="link">
             <button type="">Previous</button>
           </Link>
-        </div>
-      </div>
-      <div className="footer">
-        <div className="footer__icon">
-          <div className="footer__icon--image">
-            <img src={Iphone} alt=""></img>
-          </div>
-          <div className="footer__icon--image">
-            <img src={Oppo} alt=""></img>
-          </div>
-          <div className="footer__icon--image">
-            <img src={Samsung} alt=""></img>
-          </div>
-          <div className="footer__icon--image">
-            <img src={Sony} alt=""></img>
-          </div>
-          <div className="footer__icon--image">
-            <img src={Microsoft} alt=""></img>
-          </div>
-        </div>
-        <div className="footer__info">
-          <div className="footer__info--contact">
-            <div className="footer__info--contact--link">
-              <img src={logo} alt=""></img>
-              <ul>
-                <li>Hà Đông, Hà Nội</li>
-                <li>0942.132.121</li>
-                <li>info.namviettech@gmail.com</li>
-              </ul>
-            </div>
-            <div className="footer__info--contact--desc">
-              <h3>Thông tin</h3>
-              <ul>
-                <Link to="/trangchu" className="link">
-                  <li>Trang chủ</li>
-                </Link>
-                <Link to="/gioithieu" className="link">
-                  <li>Giới thiệu</li>
-                </Link>
-                <Link to="/sanpham" className="link">
-                  <li>Sản phẩm</li>
-                </Link>
-                <Link to="/tintuc" className="link">
-                  <li>Tin tức</li>
-                </Link>
-                <Link to="/lienhe" className="link">
-                  <li>TLiên hệ</li>
-                </Link>
-              </ul>
-            </div>
-            <div className="footer__info--contact--connect">
-              <h3>Kết nối với chúng tôi</h3>
-              <div className="footer__info--contact--connect--icon">
-                <span>
-                  <BsFacebook size={25} />
-                </span>
-                <span>
-                  <BsInstagram size={25} />
-                </span>
-                <span>
-                  <BsTwitter size={25} />
-                </span>
-                <span>
-                  <AiOutlineMail size={25} />
-                </span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </>

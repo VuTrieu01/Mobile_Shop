@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 export default function Signup({ register, showRegister, setRegister }) {
@@ -10,7 +9,6 @@ export default function Signup({ register, showRegister, setRegister }) {
   const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -21,7 +19,7 @@ export default function Signup({ register, showRegister, setRegister }) {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      history("/");
+      window.location.reload();
       exitRegister();
     } catch (e) {
       setError("Tạo tài khoản thất bại");

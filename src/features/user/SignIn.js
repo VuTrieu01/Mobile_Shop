@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import Signup from "./SignUp";
 
@@ -10,7 +9,6 @@ export default function SignIn({ login, showLogin }) {
   const { signIn } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useNavigate();
 
   const [register, setRegister] = useState(false);
   const showRegister = () => {
@@ -24,7 +22,7 @@ export default function SignIn({ login, showLogin }) {
       setError("");
       setLoading(true);
       await signIn(emailRef.current.value, passwordRef.current.value);
-      history("/");
+      window.location.reload();
       showLogin();
     } catch (e) {
       setError("Đăng nhập không thành công");

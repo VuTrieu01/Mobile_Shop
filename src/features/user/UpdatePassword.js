@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 export default function UpdatePassword() {
@@ -8,7 +7,6 @@ export default function UpdatePassword() {
   const { currentUser, updatePassword } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -26,7 +24,7 @@ export default function UpdatePassword() {
 
     Promise.all(promises)
       .then(() => {
-        history("/");
+        window.location.reload();
       })
       .catch((e) => {
         console.log(e);
@@ -34,7 +32,7 @@ export default function UpdatePassword() {
       })
       .finally(() => {
         setLoading(false);
-        history("/");
+        window.location.reload();
       });
   }
 

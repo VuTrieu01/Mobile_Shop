@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../features/user/AuthContext";
 
 export default function Dropdown() {
@@ -7,12 +7,11 @@ export default function Dropdown() {
   const showDropdown = () => setDropdown(!dropdown);
 
   const { logOut } = useAuth();
-  const history = useNavigate();
 
   async function handleLogOut() {
     try {
       await logOut();
-      history("/");
+      window.location.reload();
     } catch (e) {
       console.log(e);
     }

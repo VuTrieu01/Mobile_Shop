@@ -11,12 +11,12 @@ import { BsFillLaptopFill } from "react-icons/bs";
 import { MdLibraryBooks } from "react-icons/md";
 import { AiFillPhone, AiFillBell } from "react-icons/ai";
 import { database } from "../firebase";
-import { child, get, onValue, ref } from "firebase/database";
+import { child, onValue, ref } from "firebase/database";
 
 export default function Navbar() {
   const menu = [
     {
-      path: "trangchu",
+      path: "/",
       name: "TRANG CHỦ",
       icon: <AiFillHome size={25} />,
     },
@@ -54,7 +54,7 @@ export default function Navbar() {
 
   useEffect(() => {
     currentUser ? (
-      onValue(child(dbRef, `/${currentUser.uid}`), (snapshot) => {
+      onValue(child(dbRef, `/${currentUser.uid}` + `/cart`), (snapshot) => {
         setProduct([]);
         const data = snapshot.val();
         if (data !== null) {
