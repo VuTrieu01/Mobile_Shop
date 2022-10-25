@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { useAuth } from "../user/AuthContext";
 import { uid } from "uid";
 import { useNavigate } from "react-router-dom";
+import MessageBox from "../../components/MessageBox";
 
 export default function Apple() {
   const [apple, setApple] = useState([]);
@@ -26,6 +27,18 @@ export default function Apple() {
   const { currentUser } = useAuth();
   const [product, setProduct] = useState([]);
   const history = useNavigate();
+  const [list, setList] = useState([]);
+  let toastProperties = null;
+
+  const showToast = () => {
+    toastProperties = {
+      id: list.length + 1,
+      title: "Thông báo",
+      message: "Thêm thành công",
+      type: "success",
+    };
+    setList([...list, toastProperties]);
+  };
 
   useEffect(() => {
     get(child(dbRef, `Products`))
@@ -69,9 +82,7 @@ export default function Apple() {
           uuid,
         })
           .then(() => {
-            boolean === 0
-              ? history("/shoppingCart")
-              : console.log("Data saved successfully!");
+            boolean === 0 ? history("/shoppingCart") : showToast();
           })
           .catch((error) => {
             console.log(error);
@@ -87,9 +98,7 @@ export default function Apple() {
               uuid,
             })
               .then(() => {
-                boolean === 0
-                  ? history("/shoppingCart")
-                  : console.log("Data saved successfully!");
+                boolean === 0 ? history("/shoppingCart") : showToast();
               })
               .catch((error) => {
                 console.log(error);
@@ -227,6 +236,7 @@ export default function Apple() {
           </Link>
         </div>
       </div>
+      <MessageBox data={list} setList={setList} />
     </>
   );
 }

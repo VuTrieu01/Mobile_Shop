@@ -11,12 +11,25 @@ import { database } from "../../firebase";
 import { useEffect, useState } from "react";
 import { useAuth } from "../user/AuthContext";
 import { uid } from "uid";
+import MessageBox from "../../components/MessageBox";
 
 export default function Home() {
   const [apple, setApple] = useState([]);
   const dbRef = ref(database);
   const { currentUser } = useAuth();
   const [product, setProduct] = useState([]);
+  const [list, setList] = useState([]);
+  let toastProperties = null;
+
+  const showToast = () => {
+    toastProperties = {
+      id: list.length + 1,
+      title: "Thông báo",
+      message: "Thêm thành công",
+      type: "success",
+    };
+    setList([...list, toastProperties]);
+  };
 
   useEffect(() => {
     get(child(dbRef, `ProductHome`))
@@ -60,7 +73,7 @@ export default function Home() {
           uuid,
         })
           .then(() => {
-            console.log("Data saved successfully!");
+            showToast();
           })
           .catch((error) => {
             console.log(error);
@@ -76,7 +89,7 @@ export default function Home() {
               uuid,
             })
               .then(() => {
-                console.log("Data saved successfully!");
+                showToast();
               })
               .catch((error) => {
                 console.log(error);
@@ -192,6 +205,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <MessageBox data={list} setList={setList} />
     </>
   );
 }

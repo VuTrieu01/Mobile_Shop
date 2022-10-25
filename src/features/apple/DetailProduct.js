@@ -4,6 +4,7 @@ import { child, onValue, ref, remove, set } from "firebase/database";
 import { useAuth } from "../user/AuthContext";
 import { uid } from "uid";
 import { database } from "../../firebase";
+import MessageBox from "../../components/MessageBox";
 
 function DetailProduct() {
   const location = useLocation();
@@ -11,6 +12,19 @@ function DetailProduct() {
 
   const { currentUser } = useAuth();
   const [product, setProduct] = useState([]);
+
+  const [list, setList] = useState([]);
+  let toastProperties = null;
+
+  const showToast = () => {
+    toastProperties = {
+      id: list.length + 1,
+      title: "Thông báo",
+      message: "Thêm thành công",
+      type: "success",
+    };
+    setList([...list, toastProperties]);
+  };
 
   const dbRef = ref(database);
   useEffect(() => {
@@ -41,7 +55,7 @@ function DetailProduct() {
           uuid,
         })
           .then(() => {
-            console.log("Data saved successfully!");
+            showToast();
           })
           .catch((error) => {
             console.log(error);
@@ -57,7 +71,7 @@ function DetailProduct() {
               uuid,
             })
               .then(() => {
-                console.log("Data saved successfully!");
+                showToast();
               })
               .catch((error) => {
                 console.log(error);
@@ -65,9 +79,10 @@ function DetailProduct() {
           ) : product.length === 1 ? (
             <></>
           ) : (
-            remove(
+            (remove(
               child(dbRef, `/${currentUser.uid}` + `/cart` + `/${item.uuid}`)
-            )
+            ),
+            showToast())
           )
         );
   };
@@ -100,6 +115,7 @@ function DetailProduct() {
           </div>
         </div>
       </form>
+      <MessageBox data={list} setList={setList} />
     </>
   );
 }
