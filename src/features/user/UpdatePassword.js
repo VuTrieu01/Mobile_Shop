@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "./AuthContext";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 export default function UpdatePassword() {
   const passwordRef = useRef();
@@ -7,6 +8,11 @@ export default function UpdatePassword() {
   const { currentUser, updatePassword } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handleShowhide = () => {
+    setShow(!show);
+  };
 
   function handleSubmit(e) {
     e.preventDefault();

@@ -21,6 +21,10 @@
         border: 1px solid black;
         border-collapse: collapse;
       }
+      table {
+        width: 1000px;
+      }
+
       &--item {
         display: flex;
         align-items: center;
