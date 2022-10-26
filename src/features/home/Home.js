@@ -11,6 +11,7 @@ import { database } from "../../firebase";
 import { useEffect, useState } from "react";
 import { useAuth } from "../user/AuthContext";
 import { uid } from "uid";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [apple, setApple] = useState([]);
@@ -130,7 +131,7 @@ export default function Home() {
           </div>
         </div>
 
-        <h1>ĐIỆN THOẠI</h1>
+        <h1>SẢN PHẨM NỔI BẬT</h1>
         <div className="home__product">
           {apple.map((item, index) => (
             <div className="home__product--item" key={index}>

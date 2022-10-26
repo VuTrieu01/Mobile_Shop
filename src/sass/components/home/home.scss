@@ -1,11 +1,12 @@
 .home {
   background-color: rgb(255, 255, 255);
+  margin-top: 8px;
   &__info {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    margin: 30px auto;
+    margin: auto;
     &--item {
       display: flex;
       align-items: center;
@@ -16,12 +17,12 @@
       padding: 13px;
       border-radius: 18px;
       margin-right: 20px;
+      margin-bottom: 10px;
     }
 
     &--item:hover {
-      border-color: rgb(255, 172, 120);
-      transform: scale(105%);
-      transition: 0.5s;
+      border-color: $main-menu;
+      transition: 0.7s;
     }
   }
   &-icon {

@@ -223,7 +223,7 @@ export default function Apple() {
       <div className="button-form">
         <div className="btn-more">
           <Link to={`/sanpham2`} className="link">
-            <button type="">Next</button>
+            <button type="">More</button>
           </Link>
         </div>
       </div>
