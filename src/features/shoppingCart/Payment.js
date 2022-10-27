@@ -63,7 +63,7 @@ export default function Payment() {
           </div>
 
           <div className="payment__component__body--button">
-            <Link to="/">
+            <Link to="/" state={{ data: "success" }}>
               <button>HOÀN TẤT ĐẶT HÀNG</button>
             </Link>
           </div>

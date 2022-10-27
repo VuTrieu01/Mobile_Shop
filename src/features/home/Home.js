@@ -11,9 +11,9 @@ import { database } from "../../firebase";
 import { useEffect, useState } from "react";
 import { useAuth } from "../user/AuthContext";
 import { uid } from "uid";
-import { Link } from "react-router-dom";
 
 import MessageBox from "../../components/MessageBox";
+import { useLocation } from "react-router-dom";
 
 export default function Home() {
   const [apple, setApple] = useState([]);
@@ -22,6 +22,11 @@ export default function Home() {
   const [product, setProduct] = useState([]);
   const [list, setList] = useState([]);
   let toastProperties = null;
+
+  const location = useLocation();
+  const dataList = location.state?.data;
+
+  console.log(dataList);
 
   const showToast = (type) => {
     switch (type) {
