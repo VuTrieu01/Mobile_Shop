@@ -30,13 +30,27 @@ export default function Apple() {
   const [list, setList] = useState([]);
   let toastProperties = null;
 
-  const showToast = () => {
-    toastProperties = {
-      id: list.length + 1,
-      title: "Thông báo",
-      message: "Thêm thành công",
-      type: "success",
-    };
+  const showToast = (type) => {
+    switch (type) {
+      case "success":
+        toastProperties = {
+          id: list.length + 1,
+          title: "Thông báo",
+          message: "Thêm thành công",
+          type: "success",
+        };
+        break;
+      case "error":
+        toastProperties = {
+          id: list.length + 1,
+          title: "Thông báo",
+          message: "Bạn phải đăng nhập để sử dụng dịch vụ",
+          type: "error",
+        };
+        break;
+      default:
+        toastProperties = [];
+    }
     setList([...list, toastProperties]);
   };
 
@@ -72,45 +86,51 @@ export default function Apple() {
 
   const addCart = (itemCart, boolean) => {
     const uuid = uid();
-    product.length === 0
-      ? set(ref(database, `/${currentUser.uid}` + `/cart` + `/${uuid}`), {
-          id: itemCart.id,
-          image: itemCart.image,
-          name: itemCart.name,
-          quantity: 1,
-          price: itemCart.price,
-          uuid,
-        })
-          .then(() => {
-            boolean === 0 ? history("/shoppingCart") : showToast();
+    if (currentUser !== null) {
+      product.length === 0
+        ? set(ref(database, `/${currentUser.uid}` + `/cart` + `/${uuid}`), {
+            id: itemCart.id,
+            image: itemCart.image,
+            name: itemCart.name,
+            quantity: 1,
+            price: itemCart.price,
+            uuid,
           })
-          .catch((error) => {
-            console.log(error);
-          })
-      : product.map((item) =>
-          item.id !== itemCart.id ? (
-            set(ref(database, `/${currentUser.uid}` + `/cart` + `/${uuid}`), {
-              id: itemCart.id,
-              image: itemCart.image,
-              name: itemCart.name,
-              quantity: 1,
-              price: itemCart.price,
-              uuid,
+            .then(() => {
+              boolean === 0 ? history("/shoppingCart") : showToast("success");
             })
-              .then(() => {
-                boolean === 0 ? history("/shoppingCart") : showToast();
+            .catch((error) => {
+              console.log(error);
+            })
+        : product.map((item) =>
+            item.id !== itemCart.id ? (
+              set(ref(database, `/${currentUser.uid}` + `/cart` + `/${uuid}`), {
+                id: itemCart.id,
+                image: itemCart.image,
+                name: itemCart.name,
+                quantity: 1,
+                price: itemCart.price,
+                uuid,
               })
-              .catch((error) => {
-                console.log(error);
-              })
-          ) : product.length === 1 ? (
-            <></>
-          ) : (
-            remove(
-              child(dbRef, `/${currentUser.uid}` + `/cart` + `/${item.uuid}`)
+                .then(() => {
+                  boolean === 0
+                    ? history("/shoppingCart")
+                    : showToast("success");
+                })
+                .catch((error) => {
+                  console.log(error);
+                })
+            ) : product.length === 1 ? (
+              <></>
+            ) : (
+              remove(
+                child(dbRef, `/${currentUser.uid}` + `/cart` + `/${item.uuid}`)
+              )
             )
-          )
-        );
+          );
+    } else {
+      showToast("error");
+    }
   };
 
   return (

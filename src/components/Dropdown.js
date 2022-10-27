@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../features/user/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Dropdown() {
   const [dropdown, setDropdown] = useState(false);
   const showDropdown = () => setDropdown(!dropdown);
 
   const { logOut } = useAuth();
+  const history = useNavigate();
 
   async function handleLogOut() {
     try {
       await logOut();
+      history("/");
       window.location.reload();
     } catch (e) {
       console.log(e);

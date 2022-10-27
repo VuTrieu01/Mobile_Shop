@@ -120,10 +120,12 @@ export default function ShoppingCart() {
             </h4>
           </div>
           <div className="cart__fields--button">
-            <button>
-              <TiTick />
-              THANH TOÁN NGAY
-            </button>
+            <Link to={"/shoppingCart/payment"}>
+              <button>
+                <TiTick />
+                THANH TOÁN NGAY
+              </button>
+            </Link>
           </div>
         </div>
       ) : (

@@ -11,6 +11,7 @@ import News from "../features/new/News";
 import Contact from "../features/contact/Contact";
 import NewDetail from "../features/new/NewDetail";
 import Apple2 from "../features/apple/Apple2";
+import Payment from "../features/shoppingCart/Payment";
 export default function ClientRoutes() {
   return (
     <Routes>
@@ -19,7 +20,10 @@ export default function ClientRoutes() {
         <Route path=":id" element={<DetailProduct />} />
       </Route>
       <Route path="/updateProfile" element={<UpdatePassword />} />
-      <Route path="/shoppingCart" element={<ShoppingCart />} />
+      <Route path="/shoppingCart">
+        <Route index element={<ShoppingCart />} />
+        <Route path=":id" element={<Payment />} />
+      </Route>
       <Route path="/gioithieu" element={<Introduce />} />
       <Route path="/tintuc">
         <Route index element={<News />} />
