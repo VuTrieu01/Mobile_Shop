@@ -11,9 +11,7 @@ import { database } from "../../firebase";
 import { useEffect, useState } from "react";
 import { useAuth } from "../user/AuthContext";
 import { uid } from "uid";
-
 import MessageBox from "../../components/MessageBox";
-import { useLocation } from "react-router-dom";
 
 export default function Home() {
   const [apple, setApple] = useState([]);
@@ -23,10 +21,9 @@ export default function Home() {
   const [list, setList] = useState([]);
   let toastProperties = null;
 
-  const location = useLocation();
-  const dataList = location.state?.data;
-
-  console.log(dataList);
+  const format = (n) => {
+    return n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 
   const showToast = (type) => {
     switch (type) {
@@ -175,7 +172,7 @@ export default function Home() {
               <div className="home__product--img">
                 <img src={item.image} alt=""></img>
                 <h2>{item.name}</h2>
-                <h3>{item.price}</h3>
+                <h3>{format(item.price)} đ</h3>
                 <button className="btn-add" onClick={() => addCart(item)}>
                   <span>
                     <BsCartPlus size={20} />
