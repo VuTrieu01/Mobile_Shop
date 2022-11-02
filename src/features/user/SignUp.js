@@ -73,7 +73,7 @@ export default function Signup({ register, showRegister, setRegister }) {
   };
 
   useEffect(() => {
-    onValue(child(dbRef, `Email`), (snapshot) => {
+    onValue(child(dbRef, `Info`), (snapshot) => {
       setListEmail([]);
       const data = snapshot.val();
       if (data !== null) {
@@ -109,8 +109,12 @@ export default function Signup({ register, showRegister, setRegister }) {
           setError("");
           setLoading(true);
 
-          set(ref(database, `Email` + `/${uuid}`), {
+          set(ref(database, `Info` + `/${uuid}`), {
             email: emailRef.current.value,
+            name: nameRef.current.value,
+            phone: phoneRef.current.value,
+            address: addressRef.current.value,
+            uuid,
           })
             .then(() => {
               console.log("Success");
@@ -123,7 +127,7 @@ export default function Signup({ register, showRegister, setRegister }) {
           window.location.reload();
           exitRegister();
         } catch (e) {
-          setError("Tạo tài khoản thất bại");
+          setError("Tạo tài khoản thất bại!!!");
           console.log(e);
         }
         setLoading(false);

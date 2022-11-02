@@ -19,16 +19,59 @@ import { useAuth } from "../user/AuthContext";
 import { uid } from "uid";
 import { useNavigate } from "react-router-dom";
 import MessageBox from "../../components/MessageBox";
+import FormatMoney from "../../components/FormatMoney";
+import ReactPaginate from "react-paginate";
 
 export default function Apple() {
   const [apple, setApple] = useState([]);
 
   const dbRef = ref(database);
   const { currentUser } = useAuth();
-  const [product, setProduct] = useState([]);
+  const [cart, setCart] = useState([]);
   const history = useNavigate();
   const [list, setList] = useState([]);
+  const [type, setType] = useState();
   let toastProperties = null;
+
+  const [pageNumber, setPageNumber] = useState(0);
+  const productsPerPage = 9;
+  const pagesVisited = pageNumber * productsPerPage;
+
+  const displayProducts = apple
+    .filter((tp) => tp.type === type)
+    .slice(pagesVisited, pagesVisited + productsPerPage)
+    .map((item, index) => (
+      <div className="product__container--items" key={index}>
+        <div className="product__item" key={item.id}>
+          <Link
+            to={`/sanpham/${item.id}`}
+            state={{ data: item }}
+            className="link"
+          >
+            <img className="product__img" src={item.image} alt="" />
+            <h3>{item.name}</h3>
+          </Link>
+          <h2>
+            <FormatMoney money={item.price} />
+          </h2>
+          <div className="form-button">
+            <button className="btn-buy" onClick={() => addCart(item, 0)}>
+              <i>Mua ngay</i>
+            </button>
+            <button className="btn-add" onClick={() => addCart(item, 1)}>
+              <i>Thêm vào giỏ hàng</i>
+            </button>
+          </div>
+        </div>
+      </div>
+    ));
+
+  const pageCount = Math.ceil(
+    apple.filter((tp) => tp.type === type).length / productsPerPage
+  );
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   const showToast = (type) => {
     switch (type) {
@@ -70,12 +113,12 @@ export default function Apple() {
 
   useEffect(() => {
     currentUser ? (
-      onValue(child(dbRef, `/${currentUser.uid}` + `/cart`), (snapshot) => {
-        setProduct([]);
+      onValue(child(dbRef, `Cart` + `/${currentUser.uid}`), (snapshot) => {
+        setCart([]);
         const data = snapshot.val();
         if (data !== null) {
           Object.values(data).map((item) => {
-            setProduct((oldArray) => [...oldArray, item]);
+            setCart((oldArray) => [...oldArray, item]);
           });
         }
       })
@@ -87,8 +130,8 @@ export default function Apple() {
   const addCart = (itemCart, boolean) => {
     const uuid = uid();
     if (currentUser !== null) {
-      product.length === 0
-        ? set(ref(database, `/${currentUser.uid}` + `/cart` + `/${uuid}`), {
+      cart.length === 0
+        ? set(ref(database, `Cart` + `/${currentUser.uid}` + `/${uuid}`), {
             id: itemCart.id,
             image: itemCart.image,
             name: itemCart.name,
@@ -102,9 +145,9 @@ export default function Apple() {
             .catch((error) => {
               console.log(error);
             })
-        : product.map((item) =>
+        : cart.map((item) =>
             item.id !== itemCart.id ? (
-              set(ref(database, `/${currentUser.uid}` + `/cart` + `/${uuid}`), {
+              set(ref(database, `Cart` + `/${currentUser.uid}` + `/${uuid}`), {
                 id: itemCart.id,
                 image: itemCart.image,
                 name: itemCart.name,
@@ -120,11 +163,11 @@ export default function Apple() {
                 .catch((error) => {
                   console.log(error);
                 })
-            ) : product.length === 1 ? (
+            ) : cart.length === 1 ? (
               <></>
             ) : (
               remove(
-                child(dbRef, `/${currentUser.uid}` + `/cart` + `/${item.uuid}`)
+                child(dbRef, `Cart` + `/${currentUser.uid}` + `/${item.uuid}`)
               )
             )
           );
@@ -141,63 +184,69 @@ export default function Apple() {
             <img src={banner} alt=""></img>
           </Link>
         </div>
-        <h1>Sản phẩm Apple</h1>
+        <h1>Danh mục</h1>
         <div className="container__box">
-          <div className="container__box--item">
+          <div
+            className="container__box--item"
+            onClick={() => setType("phone")}
+          >
             <div className="item">
               <MdPhoneIphone size={75} />
             </div>
-            <span>iPhone</span>
+            <span>Điện thoại</span>
           </div>
-          <div className="container__box--item">
+          <div
+            className="container__box--item"
+            onClick={() => setType("laptop")}
+          >
             <div className="item">
               <MdLaptopChromebook size={75} />
             </div>
             <span>Laptop</span>
           </div>
-          <div className="container__box--item">
+          <div
+            className="container__box--item"
+            onClick={() => setType("headphone")}
+          >
             <div className="item">
               <FiHeadphones size={75} />
             </div>
             <span>Tai nghe</span>
           </div>
-          <div className="container__box--item">
+          <div
+            className="container__box--item"
+            onClick={() => setType("watch")}
+          >
             <div className="item">
               <BsSmartwatch size={75} />
             </div>
             <span>Watch</span>
           </div>
-          <div className="container__box--item">
-            <div className="item">
-              <RiMacLine size={75} />
-            </div>
-            <span>MacBook</span>
-          </div>
-          <div className="container__box--item">
-            <div className="item">
-              <RiMacLine size={75} />
-            </div>
-            <span>IMac</span>
-          </div>
-          <div className="container__box--item">
+          <div
+            className="container__box--item"
+            onClick={() => setType("charger")}
+          >
             <div className="item">
               <GiCharging size={75} />
             </div>
             <span>Thiết bị sạc</span>
           </div>
-          <div className="container__box--item">
+          <div
+            className="container__box--item"
+            onClick={() => setType("phoneCase")}
+          >
             <div className="item">
               <FiSmartphone size={75} />
             </div>
             <span>Ốp lưng</span>
           </div>
-          <div className="container__box--item">
+          <div className="container__box--item" onClick={() => setType("ipad")}>
             <div className="item">
               <RiMacbookFill size={75} />
             </div>
             <span>iPad</span>
           </div>
-          <div className="container__box--item">
+          {/* <div className="container__box--item">
             <div className="item">
               <CgScreen size={75} />
             </div>
@@ -214,48 +263,27 @@ export default function Apple() {
               <BsFillKeyboardFill size={75} />
             </div>
             <span>Bàn phím</span>
-          </div>
-          <div className="container__box--item"></div>
+          </div> */}
         </div>
       </div>
       <div className="route">
         <h6>Home / Tất cả sản phẩm</h6>
       </div>
       <div className="title">
-        <h1>Danh mục sản phẩm</h1>
+        <h1>Sản phẩm</h1>
       </div>
-      <div className="product__container">
-        {apple.map((item, index) => (
-          <div className="product__container--items" key={index}>
-            <div className="product__item" key={item.id}>
-              <Link
-                to={`/sanpham/${item.id}`}
-                state={{ data: item }}
-                className="link"
-              >
-                <img className="product__img" src={item.image} alt="" />
-                <h3>{item.name}</h3>
-              </Link>
-              <h2>{item.price} đ</h2>
-              <div className="form-button">
-                <button className="btn-buy" onClick={() => addCart(item, 0)}>
-                  <i>Mua ngay</i>
-                </button>
-                <button className="btn-add" onClick={() => addCart(item, 1)}>
-                  <i>Thêm vào giỏ hàng</i>
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="button-form">
-        <div className="btn-more">
-          <Link to={`/sanpham2`} className="link">
-            <button type="">More</button>
-          </Link>
-        </div>
-      </div>
+      <div className="product__container">{displayProducts}</div>
+      <ReactPaginate
+        previousLabel={"Trước"}
+        nextLabel={"Sau"}
+        pageCount={pageCount}
+        onPageChange={changePage}
+        containerClassName={"paginationBtn"}
+        previousLinkClassName={"previousBtn"}
+        nextLinkClassName={"nextBtn"}
+        disabledClassName={"paginationDisabled"}
+        activeClassName={"paginationActive"}
+      />
       <MessageBox data={list} setList={setList} />
     </>
   );
