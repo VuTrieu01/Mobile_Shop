@@ -89,7 +89,8 @@ export default function SignIn({ login, showLogin }) {
               <div className="form-input">
                 <label>Email</label>
                 <input
-                  placeholder="Email"
+                  placeholder="Email..."
+                  type="text"
                   ref={emailRef}
                   name="email"
                   value={messageEmail}
@@ -102,8 +103,8 @@ export default function SignIn({ login, showLogin }) {
               <div className="form-input">
                 <label>Mật khẩu</label>
                 <input
+                  placeholder="Password..."
                   type={show ? "text" : "password"}
-                  placeholder="Mật khẩu"
                   ref={passwordRef}
                   value={messagePassword}
                   onChange={handleChangePassword}

@@ -102,7 +102,8 @@ export default function Signup({ register, showRegister, setRegister }) {
               <div className="form-input">
                 <label>Email</label>
                 <input
-                  placeholder="Email"
+                  type="text"
+                  placeholder="Email..."
                   ref={emailRef}
                   name="email"
                   value={messageEmail}
@@ -115,7 +116,7 @@ export default function Signup({ register, showRegister, setRegister }) {
                 <label>Mật khẩu</label>
                 <input
                   type={show ? "text" : "password"}
-                  placeholder="Mật khẩu"
+                  placeholder="Mật khẩu..."
                   ref={passwordRef}
                   value={messagePassword}
                   onChange={handleChangePassword}
@@ -135,7 +136,7 @@ export default function Signup({ register, showRegister, setRegister }) {
                 <label>Nhập lại mật khẩu</label>
                 <input
                   type={show ? "text" : "password"}
-                  placeholder="Nhập lại mật khẩu"
+                  placeholder="Nhập lại mật khẩu..."
                   ref={passwordConfirmRef}
                   value={messagePasswordConfirm}
                   onChange={handleChangePasswordConfirm}

@@ -6,7 +6,8 @@
   background-color: rgba($main-text, 0.9);
   justify-content: center;
   align-items: center;
-  z-index: 1004;
+  z-index: 100;
+  font-family: "Arial Narrow", Arial, sans-serif;
 
   &__fields {
     display: flex;
@@ -40,7 +41,6 @@
 
         label {
           margin-left: 20px;
-          margin-bottom: 7px;
         }
         input {
           margin: 0 20px;
@@ -48,7 +48,24 @@
           max-width: 90%;
           min-width: 50%;
           padding: 9px;
-          border-radius: 5px;
+          background-color: inherit;
+          border: none;
+          border-bottom: 1px solid black;
+        }
+        input:nth-child(1) {
+          border-bottom: none;
+        }
+        input[type="password"]:focus {
+          outline: none;
+          border-bottom: 1px solid black;
+          transform: scale(103%);
+          transition: 0.5s;
+        }
+        input[type="text"]:focus {
+          outline: none;
+          border-bottom: 1px solid black;
+          transform: scale(103%);
+          transition: 0.5s;
         }
 
         i {
@@ -62,6 +79,7 @@
         margin-block: 0;
         margin-left: 30px;
         color: $text;
+        color: rgb(44, 44, 44);
       }
       h4 {
         margin: 0;
