@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { child, onValue, ref, remove, set } from "firebase/database";
 import { useAuth } from "../user/AuthContext";
 import { uid } from "uid";
@@ -8,12 +8,32 @@ import MessageBox from "../../components/MessageBox";
 import FormatMoney from "../../components/FormatMoney";
 
 function DetailProduct() {
+  const showType = (type) => {
+    switch (type) {
+      case "phone":
+        return "Điện thoại";
+      case "laptop":
+        return "Laptop";
+      case "headphone":
+        return "Tai nghe";
+      case "watch":
+        return "Watch";
+      case "charger":
+        return "Thiết bị sạc";
+      case "phoneCase":
+        return "Ốp lưng";
+      case "ipad":
+        return "iPad";
+      default:
+        return "Null";
+    }
+  };
   const location = useLocation();
   const data = location.state?.data;
-
+  const history = useNavigate();
   const { currentUser } = useAuth();
   const [product, setProduct] = useState([]);
-
+  const [linkProduct, setLinkProduct] = useState(showType(data.type));
   const [list, setList] = useState([]);
   let toastProperties = null;
 
@@ -107,8 +127,22 @@ function DetailProduct() {
 
   return (
     <>
-      <div className="route_detail">
-        <h6>Home / Tất cả sản phẩm / Điện thoại</h6>
+      <div className="route">
+        <span className="route__link" onClick={() => history("/")}>
+          Home
+        </span>
+        <span> / </span>
+
+        <span className="route__link" onClick={() => history("/sanpham")}>
+          Tất cả sản phẩm
+        </span>
+        <span> / </span>
+        <span
+          className="route__link"
+          onClick={() => history("/sanpham", { state: { data: linkProduct } })}
+        >
+          {linkProduct}
+        </span>
       </div>
       <form>
         <div className="containerd">

@@ -2,11 +2,11 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "../features/home/Home";
 import ShoppingCart from "../features/shoppingCart/ShoppingCart";
-import Apple from "../features/apple/Apple";
+import Product from "../features/product/Product";
+import DetailProduct from "../features/product/DetailProduct";
 import Introduce from "../features/introduce/Introduce";
 import NoMatch from "../components/NoMatch";
 import UpdatePassword from "../features/user/UpdatePassword";
-import DetailProduct from "../features/apple/DetailProduct";
 import News from "../features/new/News";
 import Contact from "../features/contact/Contact";
 import NewDetail from "../features/new/NewDetail";
@@ -35,7 +35,7 @@ export default function ClientRoutes() {
       </Route>
       <Route path="/lienhe" element={<Contact />} />
       <Route path="/sanpham">
-        <Route index element={<Apple />} />
+        <Route index element={<Product />} />
         <Route path=":id" element={<DetailProduct />} />
       </Route>
       <Route path="*" element={<NoMatch />} />
