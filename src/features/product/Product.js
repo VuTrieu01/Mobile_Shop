@@ -13,18 +13,20 @@ import ReactPaginate from "react-paginate";
 import ProductItem from "./ProductItem";
 
 export default function Products() {
+  const location = useLocation();
+  const dataType = location.state ? location.state.dataType : null;
+  const dataLinkProduct = location.state
+    ? location.state.dataLinkProduct
+    : null;
   const [product, setProduct] = useState([]);
   const dbRef = ref(database);
-  const [type, setType] = useState();
-  const [linkProduct, setLinkProduct] = useState();
+  const [type, setType] = useState(dataType);
+  const [linkProduct, setLinkProduct] = useState(dataLinkProduct);
   const [pageNumber, setPageNumber] = useState(0);
   const history = useNavigate();
   const productsPerPage = 9;
   const pagesVisited = pageNumber * productsPerPage;
   const selected = { selected: 0 };
-  const location = useLocation();
-  const data = location.state.data ? location.state.data : null;
-  console.log(data);
 
   const MENU_LIST = [
     {

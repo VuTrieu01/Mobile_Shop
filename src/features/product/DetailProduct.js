@@ -33,7 +33,7 @@ function DetailProduct() {
   const history = useNavigate();
   const { currentUser } = useAuth();
   const [product, setProduct] = useState([]);
-  const [linkProduct, setLinkProduct] = useState(showType(data.type));
+  const linkProduct = showType(data.type);
   const [list, setList] = useState([]);
   let toastProperties = null;
 
@@ -139,7 +139,11 @@ function DetailProduct() {
         <span> / </span>
         <span
           className="route__link"
-          onClick={() => history("/sanpham", { state: { data: linkProduct } })}
+          onClick={() =>
+            history("/sanpham", {
+              state: { dataType: data.type, dataLinkProduct: linkProduct },
+            })
+          }
         >
           {linkProduct}
         </span>
