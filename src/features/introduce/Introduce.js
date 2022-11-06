@@ -1,8 +1,12 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 function Introduce() {
   return (
     <>
+      <Helmet>
+        <title>MOBIJ - Giới thiệu</title>
+      </Helmet>
       <div className="intro__content">
         <h2>Giới thiệu</h2>
         <p>

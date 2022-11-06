@@ -11,6 +11,60 @@ import { useState, useEffect } from "react";
 import { child, get, ref } from "firebase/database";
 import ReactPaginate from "react-paginate";
 import ProductItem from "./ProductItem";
+import { Helmet } from "react-helmet";
+
+const MENU_LIST = [
+  {
+    icon: <MdPhoneIphone size={75} />,
+    name: "Điện thoại",
+    type: "phone",
+  },
+  {
+    icon: <MdLaptopChromebook size={75} />,
+    name: "Laptop",
+    type: "laptop",
+  },
+  {
+    icon: <FiHeadphones size={75} />,
+    name: "Tai nghe",
+    type: "headphone",
+  },
+  {
+    icon: <BsSmartwatch size={75} />,
+    name: "Watch",
+    type: "watch",
+  },
+  {
+    icon: <GiCharging size={75} />,
+    name: "Thiết bị sạc",
+    type: "charger",
+  },
+  {
+    icon: <FiSmartphone size={75} />,
+    name: "Ốp lưng",
+    type: "phoneCase",
+  },
+  {
+    icon: <RiMacbookFill size={75} />,
+    name: "iPad",
+    type: "ipad",
+  },
+  // {
+  //   icon: <CgScreen size={75} />,
+  //   name: "Màn hình",
+  //   type: "screen",
+  // },
+  // {
+  //   icon: <BsFillMouseFill size={75} />,
+  //   name: "Chuột",
+  //   type: "mouse",
+  // },
+  // {
+  //   icon: <BsFillKeyboardFill size={75} />,
+  //   name: "Bàn phím",
+  //   type: "keyboard",
+  // },
+];
 
 export default function Products() {
   const location = useLocation();
@@ -18,6 +72,7 @@ export default function Products() {
   const dataLinkProduct = location.state
     ? location.state.dataLinkProduct
     : null;
+  const dataSearch = location.state ? location.state.dataSearch : "";
   const [product, setProduct] = useState([]);
   const dbRef = ref(database);
   const [type, setType] = useState(dataType);
@@ -27,60 +82,6 @@ export default function Products() {
   const productsPerPage = 9;
   const pagesVisited = pageNumber * productsPerPage;
   const selected = { selected: 0 };
-
-  const MENU_LIST = [
-    {
-      icon: <MdPhoneIphone size={75} />,
-      name: "Điện thoại",
-      type: "phone",
-    },
-    {
-      icon: <MdLaptopChromebook size={75} />,
-      name: "Laptop",
-      type: "laptop",
-    },
-    {
-      icon: <FiHeadphones size={75} />,
-      name: "Tai nghe",
-      type: "headphone",
-    },
-    {
-      icon: <BsSmartwatch size={75} />,
-      name: "Watch",
-      type: "watch",
-    },
-    {
-      icon: <GiCharging size={75} />,
-      name: "Thiết bị sạc",
-      type: "charger",
-    },
-    {
-      icon: <FiSmartphone size={75} />,
-      name: "Ốp lưng",
-      type: "phoneCase",
-    },
-    {
-      icon: <RiMacbookFill size={75} />,
-      name: "iPad",
-      type: "ipad",
-    },
-    // {
-    //   icon: <CgScreen size={75} />,
-    //   name: "Màn hình",
-    //   type: "screen",
-    // },
-    // {
-    //   icon: <BsFillMouseFill size={75} />,
-    //   name: "Chuột",
-    //   type: "mouse",
-    // },
-    // {
-    //   icon: <BsFillKeyboardFill size={75} />,
-    //   name: "Bàn phím",
-    //   type: "keyboard",
-    // },
-  ];
-
   useEffect(() => {
     get(child(dbRef, `Products`))
       .then((snapshot) => {
@@ -95,19 +96,31 @@ export default function Products() {
       });
   }, []);
 
-  const displayProducts = type
+  const displayProducts = dataSearch
     ? product
-        .filter((tp) => tp.type === type)
+        .filter((val) =>
+          val.name.toLowerCase().includes(dataSearch.toLowerCase())
+        )
         .slice(pagesVisited, pagesVisited + productsPerPage)
-        .map((item) => <ProductItem data={item} />)
+        .map((item) => <ProductItem data={item} key={item.id} />)
+    : type
+    ? product
+        .filter((val) => val.type === type)
+        .slice(pagesVisited, pagesVisited + productsPerPage)
+        .map((item) => <ProductItem data={item} key={item.id} />)
     : product
+        .filter((val) => val.type !== "")
         .slice(pagesVisited, pagesVisited + productsPerPage)
-        .map((item) => <ProductItem data={item} />);
+        .map((item) => <ProductItem data={item} key={item.id} />);
 
   const pageCount = Math.ceil(
-    type
+    dataSearch
+      ? product.filter((val) =>
+          val.name.toLowerCase().includes(dataSearch.toLowerCase())
+        ).length / productsPerPage
+      : type
       ? product.filter((tp) => tp.type === type).length / productsPerPage
-      : product.length / productsPerPage
+      : product.filter((val) => val.type !== "").length / productsPerPage
   );
   const changePage = ({ selected }) => {
     setPageNumber(selected);
@@ -116,15 +129,24 @@ export default function Products() {
     setType(type);
     changePage(selected);
     setLinkProduct(name);
+    history("/sanpham", {
+      state: { dataSearch: "" },
+    });
   };
   const handleChangeAllProducts = () => {
     setType();
     changePage(selected);
     setLinkProduct();
+    history("/sanpham", {
+      state: { dataSearch: "" },
+    });
   };
 
   return (
     <>
+      <Helmet>
+        <title>MOBIJ - Sản phẩm</title>
+      </Helmet>
       <div className="container">
         <div className="container__banner">
           <Link to="/">
@@ -150,7 +172,9 @@ export default function Products() {
           Home
         </span>
         <span> / </span>
-        {linkProduct ? (
+        {dataSearch ? (
+          <span>Tất cả sản phẩm</span>
+        ) : linkProduct ? (
           <>
             <span className="route__link" onClick={handleChangeAllProducts}>
               Tất cả sản phẩm

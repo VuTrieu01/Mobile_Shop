@@ -105,7 +105,7 @@ export default function ProductItem({ data }) {
     setList([...list, toastProperties]);
   };
   return (
-    <div className="product__container--items" key={data.id}>
+    <div className="product__container--items">
       <div className="product__item">
         <Link
           to={`/sanpham/${data.id}`}

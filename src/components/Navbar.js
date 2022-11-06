@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { CgSearch, CgShoppingCart } from "react-icons/cg";
 import { FaUserCircle } from "react-icons/fa";
 import { AiFillHome } from "react-icons/ai";
@@ -50,6 +50,8 @@ export default function Navbar() {
   const [product, setProduct] = useState([]);
   const [info, setInfo] = useState([]);
   const dbRef = ref(database);
+  const searchProduct = useRef();
+  const history = useNavigate();
 
   useEffect(() => {
     currentUser ? (
@@ -96,9 +98,20 @@ export default function Navbar() {
           <input
             type="text"
             placeholder="Nhập tên điện thoại, máy tính, phụ kiện... cần tìm"
+            ref={searchProduct}
           />
           <div className="menu__header--search--icon">
-            <CgSearch color="white" size={30} />
+            <CgSearch
+              color="white"
+              size={30}
+              onClick={() =>
+                history("/sanpham", {
+                  state: {
+                    dataSearch: searchProduct.current.value,
+                  },
+                })
+              }
+            />
           </div>
         </div>
         <div className="menu__header--link">
@@ -144,7 +157,7 @@ export default function Navbar() {
           )}
         </div>
       </div>
-      <div className="menu__header2">
+      <div className="menu__header2" onClick={() => window.location.reload()}>
         {menu.map((item, index) => (
           <Link to={item.path} key={index} className="menu__header2--link">
             <span>{item.icon}</span>

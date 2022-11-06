@@ -9,6 +9,7 @@ import { child, onValue, ref, remove, set, update } from "firebase/database";
 import FormatMoney from "../../components/FormatMoney";
 import MessageBox from "../../components/MessageBox";
 import { uid } from "uid";
+import { Helmet } from "react-helmet";
 
 export default function Payment() {
   const { currentUser } = useAuth();
@@ -127,6 +128,9 @@ export default function Payment() {
 
   return (
     <div className="payment">
+      <Helmet>
+        <title>MOBIJ - Thanh toán</title>
+      </Helmet>
       <div className="payment__component">
         <div className="payment__component__header">
           <h2>TIẾN HÀNH ĐẶT HÀNG</h2>

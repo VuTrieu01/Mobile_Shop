@@ -6,6 +6,7 @@ import FormatMoney from "../../components/FormatMoney";
 import MessageBox from "../../components/MessageBox";
 import { Link } from "react-router-dom";
 import { RiPagesFill } from "react-icons/ri";
+import { Helmet } from "react-helmet";
 
 export default function Bill() {
   const { currentUser } = useAuth();
@@ -66,6 +67,9 @@ export default function Bill() {
 
   return (
     <div className="bill">
+      <Helmet>
+        <title>MOBIJ - Đơn hàng</title>
+      </Helmet>
       {product.length !== 0 ? (
         <div className="bill__component">
           <h2>Thông tin sản phẩm</h2>
