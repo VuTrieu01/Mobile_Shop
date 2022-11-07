@@ -5,6 +5,7 @@ import { useAuth } from "../user/AuthContext";
 import { uid } from "uid";
 import { database } from "../../firebase";
 import MessageBox from "../../components/MessageBox";
+import FormatMoney from "../../components/FormatMoney";
 
 function DetailProduct() {
   const location = useLocation();
@@ -43,7 +44,7 @@ function DetailProduct() {
   const dbRef = ref(database);
   useEffect(() => {
     currentUser ? (
-      onValue(child(dbRef, `/${currentUser.uid}` + `/cart`), (snapshot) => {
+      onValue(child(dbRef, `Cart` + `/${currentUser.uid}`), (snapshot) => {
         setProduct([]);
         const data = snapshot.val();
         if (data !== null) {
@@ -61,7 +62,7 @@ function DetailProduct() {
     const uuid = uid();
     if (currentUser !== null) {
       product.length === 0
-        ? set(ref(database, `/${currentUser.uid}` + `/cart` + `/${uuid}`), {
+        ? set(ref(database, `Cart` + `/${currentUser.uid}` + `/${uuid}`), {
             id: data.id,
             image: data.image,
             name: data.name,
@@ -77,7 +78,7 @@ function DetailProduct() {
             })
         : product.map((item) =>
             item.id !== data.id ? (
-              set(ref(database, `/${currentUser.uid}` + `/cart` + `/${uuid}`), {
+              set(ref(database, `Cart` + `/${currentUser.uid}` + `/${uuid}`), {
                 id: data.id,
                 image: data.image,
                 name: data.name,
@@ -95,7 +96,7 @@ function DetailProduct() {
               <></>
             ) : (
               remove(
-                child(dbRef, `/${currentUser.uid}` + `/cart` + `/${item.uuid}`)
+                child(dbRef, `Cart` + `/${currentUser.uid}` + `/${item.uuid}`)
               )
             )
           );
@@ -116,7 +117,9 @@ function DetailProduct() {
           </div>
           <div className="containerd__detail">
             <h2>{data.name}</h2>
-            <h3>Giá bán: {data.price}đ</h3>
+            <h3>
+              Giá bán: <FormatMoney money={data.price} />
+            </h3>
             <p>{data.desc2}</p>
             <p>{data.desc1}</p>
             <p>{data.desc4}</p>

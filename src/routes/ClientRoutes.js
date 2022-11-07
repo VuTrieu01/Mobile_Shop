@@ -10,8 +10,10 @@ import DetailProduct from "../features/apple/DetailProduct";
 import News from "../features/new/News";
 import Contact from "../features/contact/Contact";
 import NewDetail from "../features/new/NewDetail";
-import Apple2 from "../features/apple/Apple2";
 import Payment from "../features/shoppingCart/Payment";
+import InfoClient from "../features/user/InfoClient";
+import Bill from "../features/bill/Bill";
+
 export default function ClientRoutes() {
   return (
     <Routes>
@@ -19,6 +21,8 @@ export default function ClientRoutes() {
         <Route index element={<Home />} />
         <Route path=":id" element={<DetailProduct />} />
       </Route>
+      <Route path="/infoClient" element={<InfoClient />} />
+      <Route path="/bill" element={<Bill />} />
       <Route path="/updateProfile" element={<UpdatePassword />} />
       <Route path="/shoppingCart">
         <Route index element={<ShoppingCart />} />
@@ -34,11 +38,6 @@ export default function ClientRoutes() {
         <Route index element={<Apple />} />
         <Route path=":id" element={<DetailProduct />} />
       </Route>
-      <Route path="/sanpham2">
-        <Route index element={<Apple2 />} />
-        <Route path=":id" element={<DetailProduct />} />
-      </Route>
-
       <Route path="*" element={<NoMatch />} />
     </Routes>
   );

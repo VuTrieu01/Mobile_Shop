@@ -6,6 +6,7 @@ import { database } from "../../firebase";
 import { child, onValue, ref, remove, update } from "firebase/database";
 import { useAuth } from "../user/AuthContext";
 import { Link } from "react-router-dom";
+import FormatMoney from "../../components/FormatMoney";
 
 export default function ShoppingCart() {
   const { currentUser } = useAuth();
@@ -15,7 +16,7 @@ export default function ShoppingCart() {
 
   useEffect(() => {
     currentUser ? (
-      onValue(child(dbRef, `/${currentUser.uid}` + `/cart`), (snapshot) => {
+      onValue(child(dbRef, `Cart` + `/${currentUser.uid}`), (snapshot) => {
         setProduct([]);
         const data = snapshot.val();
         if (data !== null) {
@@ -34,27 +35,27 @@ export default function ShoppingCart() {
   }
 
   const handleDeleteCart = (item) => {
-    remove(child(dbRef, `/${currentUser.uid}` + `/cart` + `/${item.uuid}`));
+    remove(child(dbRef, `Cart` + `/${currentUser.uid}` + `/${item.uuid}`));
   };
 
   const DecreaseQuantity = (item) => {
     if (item.quantity === 1) {
       <></>;
     } else {
-      update(child(dbRef, `/${currentUser.uid}` + `/cart` + `/${item.uuid}`), {
+      update(child(dbRef, `Cart` + `/${currentUser.uid}` + `/${item.uuid}`), {
         quantity: item.quantity - 1,
       });
     }
   };
 
   const IncreaseQuantity = (item) => {
-    update(child(dbRef, `/${currentUser.uid}` + `/cart` + `/${item.uuid}`), {
+    update(child(dbRef, `Cart` + `/${currentUser.uid}` + `/${item.uuid}`), {
       quantity: item.quantity + 1,
     });
   };
 
   const handleDeleteAllCart = () => {
-    remove(child(dbRef, `/${currentUser.uid}` + `/cart`));
+    remove(child(dbRef, `Cart` + `/${currentUser.uid}`));
   };
 
   return (
@@ -97,7 +98,11 @@ export default function ShoppingCart() {
                       </span>
                     </td>
                     <td>
-                      <h4>{totalPrice(item.quantity, item.price)} đ</h4>
+                      <h4>
+                        <FormatMoney
+                          money={totalPrice(item.quantity, item.price)}
+                        />
+                      </h4>
                     </td>
                     <td>
                       <button onClick={() => handleDeleteCart(item)}>
@@ -113,7 +118,12 @@ export default function ShoppingCart() {
           <div className="cart__fields--item">
             <h3>
               Tổng tiền:{" "}
-              {product.reduce((a, v) => (a = a + v.price * v.quantity), 0)} đ
+              <FormatMoney
+                money={product.reduce(
+                  (a, v) => (a = a + v.price * v.quantity),
+                  0
+                )}
+              />
             </h3>
             <h4 onClick={() => handleDeleteAllCart()}>
               <AiFillDelete /> Xóa tất cả sản phẩm trong Giỏ hàng

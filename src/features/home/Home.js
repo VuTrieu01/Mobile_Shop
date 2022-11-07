@@ -11,9 +11,8 @@ import { database } from "../../firebase";
 import { useEffect, useState } from "react";
 import { useAuth } from "../user/AuthContext";
 import { uid } from "uid";
-import { Link } from "react-router-dom";
-
 import MessageBox from "../../components/MessageBox";
+import FormatMoney from "../../components/FormatMoney";
 
 export default function Home() {
   const [apple, setApple] = useState([]);
@@ -63,7 +62,7 @@ export default function Home() {
 
   useEffect(() => {
     currentUser ? (
-      onValue(child(dbRef, `/${currentUser.uid}` + `/cart`), (snapshot) => {
+      onValue(child(dbRef, `Cart` + `/${currentUser.uid}`), (snapshot) => {
         setProduct([]);
         const data = snapshot.val();
         if (data !== null) {
@@ -81,7 +80,7 @@ export default function Home() {
     const uuid = uid();
     if (currentUser !== null) {
       product.length === 0
-        ? set(ref(database, `/${currentUser.uid}` + `/cart` + `/${uuid}`), {
+        ? set(ref(database, `Cart` + `/${currentUser.uid}` + `/${uuid}`), {
             id: itemCart.id,
             image: itemCart.image,
             name: itemCart.name,
@@ -97,7 +96,7 @@ export default function Home() {
             })
         : product.map((item) =>
             item.id !== itemCart.id ? (
-              set(ref(database, `/${currentUser.uid}` + `/cart` + `/${uuid}`), {
+              set(ref(database, `Cart` + `/${currentUser.uid}` + `/${uuid}`), {
                 id: itemCart.id,
                 image: itemCart.image,
                 name: itemCart.name,
@@ -115,7 +114,7 @@ export default function Home() {
               <></>
             ) : (
               remove(
-                child(dbRef, `/${currentUser.uid}` + `/cart` + `/${item.uuid}`)
+                child(dbRef, `Cart` + `/${currentUser.uid}` + `/${item.uuid}`)
               )
             )
           );
@@ -170,7 +169,9 @@ export default function Home() {
               <div className="home__product--img">
                 <img src={item.image} alt=""></img>
                 <h2>{item.name}</h2>
-                <h3>{item.price}</h3>
+                <h3>
+                  <FormatMoney money={item.price} />
+                </h3>
                 <button className="btn-add" onClick={() => addCart(item)}>
                   <span>
                     <BsCartPlus size={20} />

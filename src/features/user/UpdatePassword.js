@@ -1,14 +1,16 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "./AuthContext";
+import { useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 export default function UpdatePassword() {
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { currentUser, updatePassword } = useAuth();
+  const { currentUser, updatePassword, logOut } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
+  const history = useNavigate();
 
   const handleShowhide = () => {
     setShow(!show);
@@ -30,6 +32,8 @@ export default function UpdatePassword() {
 
     Promise.all(promises)
       .then(() => {
+        logOut();
+        history("/");
         window.location.reload();
       })
       .catch((e) => {

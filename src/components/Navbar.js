@@ -47,19 +47,34 @@ export default function Navbar() {
   const showDropdown = () => setDropdown(!dropdown);
 
   const { currentUser } = useAuth();
-
   const [product, setProduct] = useState([]);
-
+  const [info, setInfo] = useState([]);
   const dbRef = ref(database);
 
   useEffect(() => {
     currentUser ? (
-      onValue(child(dbRef, `/${currentUser.uid}` + `/cart`), (snapshot) => {
+      onValue(child(dbRef, `Cart` + `/${currentUser.uid}`), (snapshot) => {
         setProduct([]);
         const data = snapshot.val();
         if (data !== null) {
           Object.values(data).map((item) => {
             setProduct((oldArray) => [...oldArray, item]);
+          });
+        }
+      })
+    ) : (
+      <></>
+    );
+  }, []);
+
+  useEffect(() => {
+    currentUser ? (
+      onValue(child(dbRef, `Info`), (snapshot) => {
+        setInfo([]);
+        const data = snapshot.val();
+        if (data !== null) {
+          Object.values(data).map((item) => {
+            setInfo((oldArray) => [...oldArray, item]);
           });
         }
       })
@@ -101,18 +116,24 @@ export default function Navbar() {
 
             <span>Giỏ hàng</span>
           </Link>
+
           {currentUser ? (
-            <div
-              className="menu__header--link--item"
-              onMouseEnter={showDropdown}
-              onMouseLeave={showDropdown}
-            >
-              <span>
-                <FaUserCircle size={25} />
-              </span>
-              <span>{currentUser.email}</span>
-              {dropdown && <Dropdown />}
-            </div>
+            info
+              .filter((a) => a.email === currentUser.email)
+              .map((item, index) => (
+                <div
+                  key={index}
+                  className="menu__header--link--item"
+                  onMouseEnter={showDropdown}
+                  onMouseLeave={showDropdown}
+                >
+                  <span>
+                    <FaUserCircle size={25} />
+                  </span>
+                  <span>{item.name}</span>
+                  {dropdown && <Dropdown />}
+                </div>
+              ))
           ) : (
             <div className="menu__header--link--item" onClick={showLogin}>
               <span>
