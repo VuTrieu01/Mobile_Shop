@@ -2,7 +2,7 @@ import * as React from "react";
 import banner from "../../assets/images/banner.webp";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdPhoneIphone, MdLaptopChromebook } from "react-icons/md";
-import { BsSmartwatch } from "react-icons/bs";
+import { BsSmartwatch, BsFillKeyboardFill } from "react-icons/bs";
 import { FiHeadphones, FiSmartphone } from "react-icons/fi";
 import { RiMacbookFill } from "react-icons/ri";
 import { GiCharging } from "react-icons/gi";
@@ -12,6 +12,7 @@ import { child, get, ref } from "firebase/database";
 import ReactPaginate from "react-paginate";
 import ProductItem from "./ProductItem";
 import { Helmet } from "react-helmet";
+import { CgScreen } from "react-icons/cg";
 
 const MENU_LIST = [
   {
@@ -55,7 +56,7 @@ const MENU_LIST = [
   //   type: "screen",
   // },
   // {
-  //   icon: <BsFillMouseFill size={75} />,
+  //   icon: <BsFillKeyboardFill size={75} />,
   //   name: "Chuột",
   //   type: "mouse",
   // },

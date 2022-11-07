@@ -35,9 +35,11 @@ export default function FooterBar() {
             <div className="footer__info--contact--link">
               <img src={logo} alt=""></img>
               <ul>
-                <li>Hà Đông, Hà Nội</li>
+                <li>
+                  Trường đại học Giao thông vận tải- Phân hiệu TP Hồ Chí Minh
+                </li>
                 <li>0942.132.121</li>
-                <li>info.namviettech@gmail.com</li>
+                <li>Group@gmail.com</li>
               </ul>
             </div>
             <div className="footer__info--contact--desc">

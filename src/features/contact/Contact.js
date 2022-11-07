@@ -109,12 +109,12 @@ function Contact() {
           <div className="contact__detail--item">
             <BiMap size={20} />
             <h6>Địa chỉ:</h6>
-            <span>Ho Guom Plaza, 120 Tran Phu, Ha Đong, Ha Noi</span>
+            <span>445 Lê Văn Việt - phường Tăng Nhơn Phú A - TP Thủ Đức</span>
           </div>
           <div className="contact__detail--item">
             <FiClock size={20} />
             <h6>Giờ mở cửa: </h6>
-            <span>8:00-21:00 MON-SUN</span>
+            <span>1:00-21:00 MON-SUN</span>
           </div>
 
           <div className="contact__detail--item">
@@ -126,7 +126,7 @@ function Contact() {
           <div className="contact__detail--item">
             <AiOutlinePhone size={20} />
             <h6>Email:</h6>
-            <span>info.namviettech@gmail.com</span>
+            <span>Group@gmail.com</span>
           </div>
         </div>
       </div>

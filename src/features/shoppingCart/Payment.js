@@ -90,8 +90,7 @@ export default function Payment() {
     if (
       nameRef.current.value !== "" &&
       phoneRef.current.value !== "" &&
-      addressRef.current.value !== "" &&
-      infoClientRef.current.value !== ""
+      addressRef.current.value !== ""
     ) {
       update(child(dbRef, `Info` + `/${item.uuid}`), {
         name: nameRef.current.value,
@@ -232,7 +231,7 @@ export default function Payment() {
                     type="text"
                     rows="9"
                     cols="40"
-                    placeholder="Thông tin khách hàng"
+                    placeholder="Ghi chú..."
                     ref={infoClientRef}
                   />
                 </div>

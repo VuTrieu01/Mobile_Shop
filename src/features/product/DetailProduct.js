@@ -24,6 +24,14 @@ function DetailProduct() {
         return "Ốp lưng";
       case "ipad":
         return "iPad";
+      case "mouse":
+        return "Chuột";
+      case "keyboard":
+        return "Bàn phím";
+      case "screen":
+        return "Màn hình";
+      case "imac":
+        return "iMac";
       default:
         return "Null";
     }
