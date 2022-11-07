@@ -7,6 +7,7 @@ import { ref, set } from "firebase/database";
 import { useAuth } from "../user/AuthContext";
 import { database } from "../../firebase";
 import MessageBox from "../../components/MessageBox";
+import { Helmet } from "react-helmet";
 
 function Contact() {
   const { currentUser } = useAuth();
@@ -73,6 +74,9 @@ function Contact() {
   };
   return (
     <>
+      <Helmet>
+        <title>MOBIJ - Liên hệ</title>
+      </Helmet>
       <div className="contact">
         <form>
           <div className="contact__form">

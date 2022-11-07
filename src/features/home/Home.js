@@ -13,6 +13,7 @@ import { useAuth } from "../user/AuthContext";
 import { uid } from "uid";
 import MessageBox from "../../components/MessageBox";
 import FormatMoney from "../../components/FormatMoney";
+import { Helmet } from "react-helmet";
 
 export default function Home() {
   const [apple, setApple] = useState([]);
@@ -125,6 +126,9 @@ export default function Home() {
 
   return (
     <>
+      <Helmet>
+        <title>MOBIJ - Trang chủ</title>
+      </Helmet>
       <div className="home">
         <div className="home__info">
           <div className="home__info--item">

@@ -7,6 +7,7 @@ import { child, onValue, ref, remove, update } from "firebase/database";
 import { useAuth } from "../user/AuthContext";
 import { Link } from "react-router-dom";
 import FormatMoney from "../../components/FormatMoney";
+import { Helmet } from "react-helmet";
 
 export default function ShoppingCart() {
   const { currentUser } = useAuth();
@@ -60,6 +61,9 @@ export default function ShoppingCart() {
 
   return (
     <div className="cart">
+      <Helmet>
+        <title>MOBIJ - Giỏ hàng</title>
+      </Helmet>
       {product.length !== 0 ? (
         <div className="cart__fields">
           <h2>THÔNG TIN GIỎ HÀNG</h2>

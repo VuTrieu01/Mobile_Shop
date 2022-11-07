@@ -4,6 +4,7 @@ import { useState } from "react";
 import { child, get, ref } from "firebase/database";
 import { useEffect } from "react";
 import { database } from "../../firebase";
+import { Helmet } from "react-helmet";
 
 function News() {
   const [New, setNew] = useState([]);
@@ -26,6 +27,9 @@ function News() {
 
   return (
     <>
+      <Helmet>
+        <title>MOBIJ - Tin tức</title>
+      </Helmet>
       <div className="new">
         <h1>Tiêu đề danh mục</h1>
         <div className="new__container">

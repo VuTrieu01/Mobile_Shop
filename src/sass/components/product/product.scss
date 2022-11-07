@@ -28,10 +28,8 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      position: relative;
       margin-bottom: 25px;
       span {
-        position: absolute;
         display: block;
         top: 145px;
         bottom: 0;
@@ -78,25 +76,24 @@
   }
 }
 
-.route h6 {
-  display: flex;
-  position: absolute;
-  margin-left: 80px;
-  font-size: 16px;
-  line-height: 0.5rem;
-  color: $text;
-}
-.route h6:hover {
-  cursor: pointer;
-}
+.route {
+  margin: 45px 0 0 80px;
+  &__link {
+    font-size: 16px;
+    font-weight: bold;
+    color: $text;
+  }
 
-.title h1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  margin-top: 50px;
-  margin-bottom: 0;
+  &__link:hover {
+    cursor: pointer;
+    color: $main-menu;
+    text-decoration: underline;
+  }
+  span {
+    font-size: 16px;
+    font-weight: bold;
+    color: $text;
+  }
 }
 
 .product__container {
@@ -121,7 +118,6 @@
     max-width: 350px;
     margin: auto;
     border-radius: 8px;
-    position: relative;
     background-color: inherit;
 
     .product__item {
@@ -218,7 +214,6 @@
       height: auto;
       max-width: 220px;
       margin: auto;
-      position: relative;
       padding: 0;
     }
     .product__item:hover {
@@ -257,7 +252,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   flex-wrap: wrap;
 
   .btn-more {
