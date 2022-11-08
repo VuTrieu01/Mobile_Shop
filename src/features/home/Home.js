@@ -48,7 +48,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    get(child(dbRef, `ProductHome`))
+    get(child(dbRef, `Products`))
       .then((snapshot) => {
         if (snapshot.exists()) {
           setApple(snapshot.val());
@@ -168,7 +168,7 @@ export default function Home() {
 
         <h1>SẢN PHẨM NỔI BẬT</h1>
         <div className="home__product">
-          {apple.map((item, index) => (
+          {apple.slice(0, 10).map((item, index) => (
             <div className="home__product--item" key={index}>
               <div className="home__product--img">
                 <img src={item.image} alt=""></img>

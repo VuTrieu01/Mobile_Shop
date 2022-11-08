@@ -22,14 +22,12 @@
       display: flex;
       position: relative;
       input {
-        background-color: $text;
-        border: 0;
+        outline: none;
         border-radius: 6px;
         font-size: 16px;
         padding: 12px;
         width: 500px;
-        height: auto;
-        color: $main-text2;
+        color: $text;
         min-width: 100px;
       }
 

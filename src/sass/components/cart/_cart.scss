@@ -22,15 +22,16 @@
         border-collapse: collapse;
       }
       table {
-        width: 1000px;
+        width: 1200px;
       }
 
       &--item {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
+
         img {
-          width: 50%;
+          width: 20%;
         }
         span {
           color: $main-menu;

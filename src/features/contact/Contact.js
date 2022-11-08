@@ -53,7 +53,7 @@ function Contact() {
       showToast("error");
     } else {
       showToast("success");
-      set(ref(database, `/${currentUser.uid}` + `/contact` + `/${uuid}`), {
+      set(ref(database, `Contact` + `/${currentUser.uid}` + `/${uuid}`), {
         name: nameRef.current.value,
         phone: phoneNumberRef.current.value,
         email: emailRef.current.value,
@@ -98,9 +98,20 @@ function Contact() {
             />
             <label>Nội dung liên hệ</label>
             <textarea type="text" rows="9" cols="40" ref={contentRef} />
-            <button type="button" onClick={handleSubmit}>
-              Submit
-            </button>
+            {currentUser ? (
+              <button type="button" onClick={handleSubmit}>
+                Submit
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleSubmit}
+                disabled="false"
+                style={{ backgroundColor: "rgb(87, 81, 81)" }}
+              >
+                Submit
+              </button>
+            )}
           </div>
         </form>
 

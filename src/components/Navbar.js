@@ -102,7 +102,7 @@ export default function Navbar() {
           />
           <div className="menu__header--search--icon">
             <CgSearch
-              color="white"
+              color="black"
               size={30}
               onClick={() =>
                 history("/sanpham", {

@@ -2,7 +2,11 @@ import * as React from "react";
 import banner from "../../assets/images/banner.webp";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdPhoneIphone, MdLaptopChromebook } from "react-icons/md";
-import { BsSmartwatch, BsFillKeyboardFill } from "react-icons/bs";
+import {
+  BsSmartwatch,
+  BsFillKeyboardFill,
+  BsFillMouseFill,
+} from "react-icons/bs";
 import { FiHeadphones, FiSmartphone } from "react-icons/fi";
 import { RiMacbookFill } from "react-icons/ri";
 import { GiCharging } from "react-icons/gi";
@@ -50,21 +54,21 @@ const MENU_LIST = [
     name: "iPad",
     type: "ipad",
   },
-  // {
-  //   icon: <CgScreen size={75} />,
-  //   name: "Màn hình",
-  //   type: "screen",
-  // },
-  // {
-  //   icon: <BsFillKeyboardFill size={75} />,
-  //   name: "Chuột",
-  //   type: "mouse",
-  // },
-  // {
-  //   icon: <BsFillKeyboardFill size={75} />,
-  //   name: "Bàn phím",
-  //   type: "keyboard",
-  // },
+  {
+    icon: <CgScreen size={75} />,
+    name: "Màn hình",
+    type: "screen",
+  },
+  {
+    icon: <BsFillMouseFill size={75} />,
+    name: "Chuột",
+    type: "mouse",
+  },
+  {
+    icon: <BsFillKeyboardFill size={75} />,
+    name: "Bàn phím",
+    type: "keyboard",
+  },
 ];
 
 export default function Products() {
