@@ -1,1 +1,17 @@
-
+{
+  "files": {
+    "main.css": "./static/css/main.74a8e013.css",
+    "main.js": "./static/js/main.9b60e97f.js",
+    "static/media/trend3.png": "./static/media/trend3.49bd32de762d9f62f6cf.png",
+    "static/media/trend1.png": "./static/media/trend1.1c67cd735ddc5b3abea8.png",
+    "static/media/trend2.png": "./static/media/trend2.87c595f9d3ad623e7fe6.png",
+    "static/media/banner.webp": "./static/media/banner.98582a5da4626e390091.webp",
+    "index.html": "./index.html",
+    "main.74a8e013.css.map": "./static/css/main.74a8e013.css.map",
+    "main.9b60e97f.js.map": "./static/js/main.9b60e97f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.74a8e013.css",
+    "static/js/main.9b60e97f.js"
+  ]
+}
